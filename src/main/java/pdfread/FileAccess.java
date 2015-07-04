@@ -7,13 +7,19 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.google.common.primitives.Bytes;
+
 public class FileAccess {
+
+    private final static byte commonCsvHead[] = { (byte) 0xEF, (byte) 0xBB,
+            (byte) 0xBF };
 
     public static boolean Move(File srcFile, String destPath) {
         // Destination directory
@@ -183,7 +189,7 @@ public class FileAccess {
                     pdfMode.setCompanyName(item[2]);
                     pdfMode.setMailAddress(item[3]);
                     pdfMode.setPdfFile(item[4]);
-                    if (item.length == 6){
+                    if (item.length == 6) {
                         pdfMode.setSendMailFlg(item[5]);
                     }
                     list.add(pdfMode);
@@ -210,19 +216,20 @@ public class FileAccess {
         }
         return list;
     }
-    
+
     public static String readMailTpl(String file) {
         ArrayList<PdfMode> list = new ArrayList<PdfMode>();
         BufferedReader reader = null;
         FileReader fr = null;
-        StringBuffer buffer = new StringBuffer();;
+        StringBuffer buffer = new StringBuffer();
+        ;
         try {
             fr = new FileReader(file);
             reader = new BufferedReader(fr);// 换成你的文件名
             reader.readLine();// 第一行信息，为标题信息，不用,如果需要，注释掉
             String line = null;
             while ((line = reader.readLine()) != null) {
-                buffer.append("<span>").append(line ).append("</span><br>");
+                buffer.append("<span>").append(line).append("</span><br>");
             }
             reader.close();
             fr.close();
@@ -245,7 +252,7 @@ public class FileAccess {
         }
         return buffer.toString();
     }
-    
+
     public static void writeCSVByPdfModes(String file, ArrayList<PdfMode> lists) {
         ArrayList<PdfMode> list = new ArrayList<PdfMode>();
         BufferedWriter bw = null;
@@ -255,9 +262,11 @@ public class FileAccess {
             fw = new FileWriter(csv, false);
             bw = new BufferedWriter(fw); // 附加
             // 添加新的数据行
+
+            bw.write(commonCsvHead.toString());
             bw.write("order_no,company_code,company_name,mail_address,pdf_file,sendmail_flag");
             bw.newLine();
-            for(PdfMode mode: lists){
+            for (PdfMode mode : lists) {
                 StringBuffer buffer = new StringBuffer();
                 buffer.append(converStr(mode.getOrderNo())).append(",");
                 buffer.append(converStr(mode.getCompanyCode())).append(",");
@@ -265,7 +274,7 @@ public class FileAccess {
                 buffer.append(converStr(mode.getMailAddress())).append(",");
                 buffer.append(converStr(mode.getPdfFile())).append(",");
                 buffer.append(converStr(mode.getSendMailFlg()));
-                bw.write(converCode(buffer.toString(),"UTF-8","GBK"));
+                bw.write(converCode(buffer.toString(), "UTF-8", "GBK"));
                 bw.newLine();
             }
             bw.close();
@@ -288,36 +297,63 @@ public class FileAccess {
             }
         }
     }
-    public static String converCode(String str, String u1, String u2){
-         try {
-            str = new String(str.getBytes( u1));
-            System.out.println(str);  
-             str = new String(str.getBytes(),u1);   
-            System.out.println(str);  
-        //     str = new String(str.getBytes(u2)); 
-         } catch (UnsupportedEncodingException e) {
-             // TODO Auto-generated catch block
-             e.printStackTrace();
-         } 
-        return str;
+
+    public static void writeCsvFileUTF8(String path, String content) {
+        File file = new File(path);
+
+        try (FileOutputStream fop = new FileOutputStream(file)) {
+
+            // if file doesn't exists, then create it
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            // get the content in bytes
+            byte[] contentInBytes = Bytes.concat(commonCsvHead,
+                    content.getBytes("UTF-8"));
+
+            fop.write(contentInBytes);
+            fop.flush();
+            fop.close();
+
+            System.out.println("Done");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public static String converCode2(String str, String u1, String u2){
+    public static String converCode(String str, String u1, String u2) {
         try {
-           str = new String(str.getBytes(u1));
-           System.out.println(str);
-           str = new String(str.getBytes(),u1);
-           System.out.println(str);
-           str = new String(str.getBytes(u2));
+            str = new String(str.getBytes(u1));
+            System.out.println(str);
+            str = new String(str.getBytes(), u1);
+            System.out.println(str);
+            // str = new String(str.getBytes(u2));
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-       return str;
-   }
+        return str;
+    }
 
-    public static String converStr(String str){
-        if (str == null){
+//    public static String converCode2(String str, String u1, String u2) {
+//        try {
+//            str = new String(str.getBytes(u1));
+//            System.out.println(str);
+//            str = new String(str.getBytes(), u1);
+//            System.out.println(str);
+//            str = new String(str.getBytes(u2));
+//        } catch (UnsupportedEncodingException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        return str;
+//    }
+
+    public static String converStr(String str) {
+        if (str == null) {
             return "";
         } else {
             return str;
