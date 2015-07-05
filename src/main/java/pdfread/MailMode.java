@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class MailMode {
     public final static String SENDMAIL_FLG_OK = "OK";
 
+    String title = "";
     String from = null;
     String to = null;
     String cc = null;
@@ -61,11 +62,18 @@ public class MailMode {
     public void setLogoFilePath(String logoFilePath) {
         this.logoFilePath = logoFilePath;
     }
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
     @Override
     public String toString() {
-        return "MailMode [from=" + from + ", to=" + to + ", cc=" + cc
-                + ", attachFiles=" + attachFiles + ", logoFile=" + logoFile
-                + ", logoFilePath=" + logoFilePath + "]";
+        return "MailMode [SendMailFlg=" + SendMailFlg + ", cc=" + cc
+                + ", content=" + content + ", from=" + from + ", logoFile="
+                + logoFile + ", logoFilePath=" + logoFilePath + ", title="
+                + title + ", to=" + to + "]";
     }
  
 }

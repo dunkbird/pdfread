@@ -14,8 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.google.common.primitives.Bytes;
-
 public class FileAccess {
 
     private final static byte commonCsvHead[] = { (byte) 0xEF, (byte) 0xBB,
@@ -263,7 +261,7 @@ public class FileAccess {
             bw = new BufferedWriter(fw); // 附加
             // 添加新的数据行
 
-            bw.write(commonCsvHead.toString());
+            bw.write(new String(commonCsvHead, "UTF-8"));
             bw.write("order_no,company_code,company_name,mail_address,pdf_file,sendmail_flag");
             bw.newLine();
             for (PdfMode mode : lists) {
@@ -298,32 +296,6 @@ public class FileAccess {
         }
     }
 
-    public static void writeCsvFileUTF8(String path, String content) {
-        File file = new File(path);
-
-        try (FileOutputStream fop = new FileOutputStream(file)) {
-
-            // if file doesn't exists, then create it
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            // get the content in bytes
-            byte[] contentInBytes = Bytes.concat(commonCsvHead,
-                    content.getBytes("UTF-8"));
-
-            fop.write(contentInBytes);
-            fop.flush();
-            fop.close();
-
-            System.out.println("Done");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     public static String converCode(String str, String u1, String u2) {
         try {
             str = new String(str.getBytes(u1));
@@ -337,20 +309,6 @@ public class FileAccess {
         }
         return str;
     }
-
-//    public static String converCode2(String str, String u1, String u2) {
-//        try {
-//            str = new String(str.getBytes(u1));
-//            System.out.println(str);
-//            str = new String(str.getBytes(), u1);
-//            System.out.println(str);
-//            str = new String(str.getBytes(u2));
-//        } catch (UnsupportedEncodingException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        return str;
-//    }
 
     public static String converStr(String str) {
         if (str == null) {

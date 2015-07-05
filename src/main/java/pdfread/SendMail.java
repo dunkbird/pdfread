@@ -138,8 +138,8 @@ public class SendMail {
         // 创建MimeMessage实例对象
         MimeMessage message = new MimeMessage(session);
         // 设置主题
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");// 设置日期格式
-        message.setSubject("DHL报关单(" + df.format(new Date()) +")");
+
+        message.setSubject(mailMode.getTitle());
         // 设置发送人
         message.setFrom(new InternetAddress(from, "中外运-敦豪辽宁分公司",
                 charset));
