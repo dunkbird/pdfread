@@ -1,6 +1,8 @@
 package pdfread;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MailMode {
     public final static String SENDMAIL_FLG_OK = "OK";
@@ -10,7 +12,8 @@ public class MailMode {
     String to = null;
     String cc = null;
     ArrayList<String> attachFiles  = new ArrayList<String>();
-    String logoFile = "";
+    Map<String,String> orderNos  = new HashMap<String,String>();
+	String logoFile = "";
     String logoFilePath = "";
     String content = "";
     String SendMailFlg = "";
@@ -50,7 +53,13 @@ public class MailMode {
     public void setAttachFiles(String file) {
         this.attachFiles.add(file);
     }
-    public String getLogoFile() {
+    public Map<String,String> getOrderNos() {
+		return orderNos;
+	}
+	public void setOrderNos(String orderNo) {
+		this.orderNos.put(orderNo, orderNo);
+	}
+	public String getLogoFile() {
         return logoFile;
     }
     public void setLogoFile(String logoFile) {

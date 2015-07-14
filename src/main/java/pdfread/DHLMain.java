@@ -1,16 +1,21 @@
 package pdfread;
 
-import javax.swing.*;
-
-import java.awt.event.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.Map;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
  * swing基础实例
@@ -43,7 +48,8 @@ class NewFrame extends JFrame {
     private Runnable run = null; // 更新组件的线程
     private int countProcess = 0;
     private int okMail = 0;
-
+    private int pdfReadSuccessCount = 0; //要处理的pdf的错误的总件数
+    
     public NewFrame() {
         super();
         this.setSize(600, 500);
@@ -110,7 +116,7 @@ class NewFrame extends JFrame {
         if (labelVersion == null) {
             labelVersion = new JLabel();
             labelVersion.setBounds(100, 300, 100, 18);
-            labelVersion.setText("  Ver: 1.02");
+            labelVersion.setText("  Ver: 1.03");
 
         }
         return labelVersion;
@@ -141,6 +147,7 @@ class NewFrame extends JFrame {
     private class ConvertButton implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             countProcess = 0;
+            pdfReadSuccessCount = 0;
             new Thread(new Runnable() {
                 public void run() {
                     try {
@@ -191,8 +198,9 @@ class NewFrame extends JFrame {
                                                                         + countProcess);
                                                     }
                                                 });
-                                        pdfModeLists.add(pdfMode);
                                         if (pdfMode != null) {
+                                        	pdfReadSuccessCount++;
+                                        	pdfModeLists.add(pdfMode);
                                             System.out.println(pdfMode);
                                         }
                                     }
@@ -226,7 +234,8 @@ class NewFrame extends JFrame {
 
                         SwingUtilities.invokeAndWait(new Runnable() {
                             public void run() {
-                                labelMessage.setText("3. Process Done.");
+                                labelMessage.setText("3. Done."  
+                                		+ " Success: " + pdfReadSuccessCount + ", Failure: " + (countProcess - pdfReadSuccessCount) );
                             }
                         });
                     } catch (Exception e) {
@@ -307,8 +316,12 @@ class NewFrame extends JFrame {
                                         mailMode = new MailMode();
                                     }
                                     mailMode.setTo(pdfMode.getMailAddress());
-                                    mailMode.setAttachFiles(pdfMode
-                                            .getPdfFile());
+                                    Map<String,String> orderNos = mailMode.getOrderNos();
+                                    if (!orderNos.containsKey(pdfMode.getOrderNo())){
+                                    	mailMode.setOrderNos(pdfMode.getOrderNo());
+                                        mailMode.setAttachFiles(pdfMode
+                                                .getPdfFile());
+                                    }
                                     mailMode.setLogoFile(strRootPath
                                             + "\\logo.png");
                                     mailMode.setContent(content);
@@ -376,10 +389,14 @@ class NewFrame extends JFrame {
                         FileAccess.writeCSVByPdfModes(strPath
                                 + CSV_FILE_ORDER_INFO, pdfListsForWrite);
                         int mailSize = mailModeMap.keySet().size();
-
-                        labelMessage.setText("3. Done. Success ("
-                                + okMail + "). Failure (" + (mailSize - okMail)
-                                + ")");
+                        SwingUtilities
+                        .invokeAndWait(new Runnable() {
+                            public void run() {
+                            	 labelMessage.setText("3. Done. Success: "
+                                         + okMail + ", Failure: " + (mailSize - okMail));
+                            }
+                        });
+                       
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
