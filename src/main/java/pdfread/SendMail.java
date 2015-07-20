@@ -32,26 +32,26 @@ import javax.mail.internet.MimeUtility;
 import com.sun.mail.util.MailSSLSocketFactory;
 
 /**
- * ä½¿ç”¨SMTPåè®®å‘é€ç”µå­é‚®ä»¶
+ * Ê¹ÓÃSMTPĞ­Òé·¢ËÍµç×ÓÓÊ¼ş
  */
 public class SendMail {
 
-    // é‚®ä»¶å‘é€åè®®
+    // ÓÊ¼ş·¢ËÍĞ­Òé
     private static String PROTOCOL = "smtp";
 
-    // SMTPé‚®ä»¶æœåŠ¡å™¨
+    // SMTPÓÊ¼ş·şÎñÆ÷
     private static String HOST = "smtp.qq.com";
 
-    // SMTPé‚®ä»¶æœåŠ¡å™¨é»˜è®¤ç«¯å£
+    // SMTPÓÊ¼ş·şÎñÆ÷Ä¬ÈÏ¶Ë¿Ú
     private static String PORT = "465";
 
-    // æ˜¯å¦è¦æ±‚èº«ä»½è®¤è¯
+    // ÊÇ·ñÒªÇóÉí·İÈÏÖ¤
     private static String IS_AUTH = "true";
 
-    // æ˜¯å¦å¯ç”¨è°ƒè¯•æ¨¡å¼ï¼ˆå¯ç”¨è°ƒè¯•æ¨¡å¼å¯æ‰“å°å®¢æˆ·ç«¯ä¸æœåŠ¡å™¨äº¤äº’è¿‡ç¨‹æ—¶ä¸€é—®ä¸€ç­”çš„å“åº”æ¶ˆæ¯ï¼‰
+    // ÊÇ·ñÆôÓÃµ÷ÊÔÄ£Ê½£¨ÆôÓÃµ÷ÊÔÄ£Ê½¿É´òÓ¡¿Í»§¶ËÓë·şÎñÆ÷½»»¥¹ı³ÌÊ±Ò»ÎÊÒ»´ğµÄÏìÓ¦ÏûÏ¢£©
     private static String IS_ENABLED_DEBUG_MOD = "true";
 
-    // å‘ä»¶äºº
+    // ·¢¼şÈË
     private static String from = "93091620@qq.com";
     private static String cc = "93091620@qq.com";
     
@@ -106,7 +106,7 @@ public class SendMail {
         props.setProperty("mail.smtp.port", PORT);
         props.setProperty("mail.smtp.auth", IS_AUTH);
         props.setProperty("mail.debug", IS_ENABLED_DEBUG_MOD);
-        props.setProperty("mail.smtp.auth", "true");// å¿…é¡» æ™®é€šå®¢æˆ·ç«¯
+        props.setProperty("mail.smtp.auth", "true");// ±ØĞë ÆÕÍ¨¿Í»§¶Ë
         props.put("mail.debug", "true");
         props.put("mail.debug.auth", "true");
         //
@@ -125,29 +125,29 @@ public class SendMail {
     }
 
     /**
-     * å‘é€å¸¦å†…åµŒå›¾ç‰‡ã€é™„ä»¶ã€å¤šæ”¶ä»¶äºº(æ˜¾ç¤ºé‚®ç®±å§“å)ã€é‚®ä»¶ä¼˜å…ˆçº§ã€é˜…è¯»å›æ‰§çš„å®Œæ•´çš„HTMLé‚®ä»¶
+     * ·¢ËÍ´øÄÚÇ¶Í¼Æ¬¡¢¸½¼ş¡¢¶àÊÕ¼şÈË(ÏÔÊ¾ÓÊÏäĞÕÃû)¡¢ÓÊ¼şÓÅÏÈ¼¶¡¢ÔÄ¶Á»ØÖ´µÄÍêÕûµÄHTMLÓÊ¼ş
      */
     public static void sendMultipleEmail(MailMode mailMode) throws Exception {
         System.out.println("send mail start!!!!!!!!!!!!!!!!!!");
         Properties props = getProps();
 
-        String charset = "utf-8"; // æŒ‡å®šä¸­æ–‡ç¼–ç æ ¼å¼
-        // åˆ›å»ºSessionå®ä¾‹å¯¹è±¡
+        String charset = "utf-8"; // Ö¸¶¨ÖĞÎÄ±àÂë¸ñÊ½
+        // ´´½¨SessionÊµÀı¶ÔÏó
         Session session = Session.getInstance(props, new MyAuthenticator());
 
-        // åˆ›å»ºMimeMessageå®ä¾‹å¯¹è±¡
+        // ´´½¨MimeMessageÊµÀı¶ÔÏó
         MimeMessage message = new MimeMessage(session);
-        // è®¾ç½®ä¸»é¢˜
+        // ÉèÖÃÖ÷Ìâ
 
         message.setSubject(mailMode.getTitle());
-        // è®¾ç½®å‘é€äºº
-        message.setFrom(new InternetAddress(from, "ä¸­å¤–è¿-æ•¦è±ªè¾½å®åˆ†å…¬å¸",
+        // ÉèÖÃ·¢ËÍÈË
+        message.setFrom(new InternetAddress(from, "ÖĞÍâÔË-¶ØºÀÁÉÄş·Ö¹«Ë¾",
                 charset));
-        // è®¾ç½®æ”¶ä»¶äºº
+        // ÉèÖÃÊÕ¼şÈË
         message.setRecipients(RecipientType.TO, new Address[] {
-        // å‚æ•°1ï¼šé‚®ç®±åœ°å€ï¼Œå‚æ•°2ï¼šå§“åï¼ˆåœ¨å®¢æˆ·ç«¯æ”¶ä»¶åªæ˜¾ç¤ºå§“åï¼Œè€Œä¸æ˜¾ç¤ºé‚®ä»¶åœ°å€ï¼‰ï¼Œå‚æ•°3ï¼šå§“åä¸­æ–‡å­—ç¬¦ä¸²ç¼–ç 
+        // ²ÎÊı1£ºÓÊÏäµØÖ·£¬²ÎÊı2£ºĞÕÃû£¨ÔÚ¿Í»§¶ËÊÕ¼şÖ»ÏÔÊ¾ĞÕÃû£¬¶ø²»ÏÔÊ¾ÓÊ¼şµØÖ·£©£¬²ÎÊı3£ºĞÕÃûÖĞÎÄ×Ö·û´®±àÂë
                 new InternetAddress(mailMode.getTo(), "", charset) });
-        // è®¾ç½®æŠ„é€
+        // ÉèÖÃ³­ËÍ
         String[] ccMail = cc.split(",");
         Address[] addressCc = new Address[ccMail.length];
         for (int i=0; i<ccMail.length; i++){
@@ -155,30 +155,30 @@ public class SendMail {
         }
 
         message.setRecipients(RecipientType.CC, addressCc);
-        // è®¾ç½®å¯†é€
+        // ÉèÖÃÃÜËÍ
         // message.setRecipient(RecipientType.BCC, new
-        // InternetAddress("93091620@qq.com", "èµµå…­_QQ", charset));
-        // è®¾ç½®å‘é€æ—¶é—´
+        // InternetAddress("93091620@qq.com", "ÕÔÁù_QQ", charset));
+        // ÉèÖÃ·¢ËÍÊ±¼ä
         message.setSentDate(new Date());
-        // è®¾ç½®å›å¤äºº(æ”¶ä»¶äººå›å¤æ­¤é‚®ä»¶æ—¶,é»˜è®¤æ”¶ä»¶äºº)
+        // ÉèÖÃ»Ø¸´ÈË(ÊÕ¼şÈË»Ø¸´´ËÓÊ¼şÊ±,Ä¬ÈÏÊÕ¼şÈË)
          message.setReplyTo(InternetAddress.parse("\"" +
          MimeUtility.encodeText("") + "\" <" + ccMail[0] + ">"));
-        // è®¾ç½®ä¼˜å…ˆçº§(1:ç´§æ€¥ 3:æ™®é€š 5:ä½)
+        // ÉèÖÃÓÅÏÈ¼¶(1:½ô¼± 3:ÆÕÍ¨ 5:µÍ)
         message.setHeader("X-Priority", "3");
-        // è¦æ±‚é˜…è¯»å›æ‰§(æ”¶ä»¶äººé˜…è¯»é‚®ä»¶æ—¶ä¼šæç¤ºå›å¤å‘ä»¶äºº,è¡¨æ˜é‚®ä»¶å·²æ”¶åˆ°,å¹¶å·²é˜…è¯»)
+        // ÒªÇóÔÄ¶Á»ØÖ´(ÊÕ¼şÈËÔÄ¶ÁÓÊ¼şÊ±»áÌáÊ¾»Ø¸´·¢¼şÈË,±íÃ÷ÓÊ¼şÒÑÊÕµ½,²¢ÒÑÔÄ¶Á)
         // message.setHeader("Disposition-Notification-To", from);
 
-        // åˆ›å»ºä¸€ä¸ªMIMEå­ç±»å‹ä¸º"mixed"çš„MimeMultipartå¯¹è±¡ï¼Œè¡¨ç¤ºè¿™æ˜¯ä¸€å°æ··åˆç»„åˆç±»å‹çš„é‚®ä»¶
+        // ´´½¨Ò»¸öMIME×ÓÀàĞÍÎª"mixed"µÄMimeMultipart¶ÔÏó£¬±íÊ¾ÕâÊÇÒ»·â»ìºÏ×éºÏÀàĞÍµÄÓÊ¼ş
         MimeMultipart mailContent = new MimeMultipart("mixed");
         message.setContent(mailContent);
 
         for (String attachFile : mailMode.getAttachFiles()) {
-            // é™„ä»¶
+            // ¸½¼ş
             MimeBodyPart attach1 = new MimeBodyPart();
 
-            // å°†é™„ä»¶å’Œå†…å®¹æ·»åŠ åˆ°é‚®ä»¶å½“ä¸­
+            // ½«¸½¼şºÍÄÚÈİÌí¼Óµ½ÓÊ¼şµ±ÖĞ
             mailContent.addBodyPart(attach1);
-            // é™„ä»¶1(åˆ©ç”¨jafæ¡†æ¶è¯»å–æ•°æ®æºç”Ÿæˆé‚®ä»¶ä½“)
+            // ¸½¼ş1(ÀûÓÃjaf¿ò¼Ü¶ÁÈ¡Êı¾İÔ´Éú³ÉÓÊ¼şÌå)
             File attachFileObj = new File(attachFile);
             DataSource ds1 = new FileDataSource(attachFileObj);
             DataHandler dh1 = new DataHandler(ds1);
@@ -188,29 +188,29 @@ public class SendMail {
             attach1.setFileName(MimeUtility.encodeText(attachFileName));
             attach1.setDataHandler(dh1);
         }
-        // å†…å®¹
+        // ÄÚÈİ
         MimeBodyPart mailBody = new MimeBodyPart();
 
         mailContent.addBodyPart(mailBody);
 
-        // é‚®ä»¶æ­£æ–‡(å†…åµŒå›¾ç‰‡+htmlæ–‡æœ¬)
-        MimeMultipart body = new MimeMultipart("related"); // é‚®ä»¶æ­£æ–‡ä¹Ÿæ˜¯ä¸€ä¸ªç»„åˆä½“,éœ€è¦æŒ‡æ˜ç»„åˆå…³ç³»
+        // ÓÊ¼şÕıÎÄ(ÄÚÇ¶Í¼Æ¬+htmlÎÄ±¾)
+        MimeMultipart body = new MimeMultipart("related"); // ÓÊ¼şÕıÎÄÒ²ÊÇÒ»¸ö×éºÏÌå,ĞèÒªÖ¸Ã÷×éºÏ¹ØÏµ
         mailBody.setContent(body);
 
-        // é‚®ä»¶æ­£æ–‡ç”±htmlå’Œå›¾ç‰‡æ„æˆ
+        // ÓÊ¼şÕıÎÄÓÉhtmlºÍÍ¼Æ¬¹¹³É
         MimeBodyPart imgPart = new MimeBodyPart();
         MimeBodyPart htmlPart = new MimeBodyPart();
         body.addBodyPart(imgPart);
         body.addBodyPart(htmlPart);
 
-        // æ­£æ–‡å›¾ç‰‡
+        // ÕıÎÄÍ¼Æ¬
         DataSource ds3 = new FileDataSource(mailMode.getLogoFile());
         DataHandler dh3 = new DataHandler(ds3);
         imgPart.setDataHandler(dh3);
         String logoFileName = new File(mailMode.getLogoFile()).getName();
         imgPart.setContentID(logoFileName);
 
-        // htmlé‚®ä»¶å†…å®¹
+        // htmlÓÊ¼şÄÚÈİ
         MimeMultipart htmlMultipart = new MimeMultipart("alternative");
         htmlPart.setContent(htmlMultipart);
         MimeBodyPart htmlContent = new MimeBodyPart();
@@ -220,21 +220,21 @@ public class SendMail {
                 "text/html;charset=utf-8");
         htmlMultipart.addBodyPart(htmlContent);
 
-        // ä¿å­˜é‚®ä»¶å†…å®¹ä¿®æ”¹
+        // ±£´æÓÊ¼şÄÚÈİĞŞ¸Ä
         message.saveChanges();
 
         /*
          * File eml = buildEmlFile(message); sendMailForEml(eml);
          */
 
-        // å‘é€é‚®ä»¶
+        // ·¢ËÍÓÊ¼ş
         Transport.send(message);
         
         System.out.println("send mail ok!!!!!!!!!!!!!!!!!!");
     }
 
     /**
-     * å‘é‚®ä»¶æœåŠ¡å™¨æäº¤è®¤è¯ä¿¡æ¯
+     * ÏòÓÊ¼ş·şÎñÆ÷Ìá½»ÈÏÖ¤ĞÅÏ¢
      */
     static class MyAuthenticator extends Authenticator {
         public MyAuthenticator() {

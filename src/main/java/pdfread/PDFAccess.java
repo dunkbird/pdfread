@@ -86,7 +86,7 @@ public class PDFAccess {
                     pdfMode.setCompanyCode(companyCode);
                     pdfMode.setCompanyName(companyName);
                     pdfMode.setOrderNo(orderNo);
-                    SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");//璁剧疆鏃ユ湡鏍煎紡
+                    SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");//设置日期格式
                     String pdfFile = path + orderNo + "_CRL_DLC_DLW_001_" + df.format(new Date()) + ".pdf";
                     pdfMode.setPdfFile(pdfFile);
                     FileAccess.Move(file, pdfFile);

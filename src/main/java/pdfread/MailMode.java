@@ -13,7 +13,7 @@ public class MailMode {
     String cc = null;
     ArrayList<String> attachFiles  = new ArrayList<String>();
     Map<String,String> orderNos  = new HashMap<String,String>();
-	String logoFile = "";
+    String logoFile = "";
     String logoFilePath = "";
     String content = "";
     String SendMailFlg = "";
@@ -54,12 +54,12 @@ public class MailMode {
         this.attachFiles.add(file);
     }
     public Map<String,String> getOrderNos() {
-		return orderNos;
-	}
-	public void setOrderNos(String orderNo) {
-		this.orderNos.put(orderNo, orderNo);
-	}
-	public String getLogoFile() {
+        return orderNos;
+    }
+    public void setOrderNos(String orderNo) {
+        this.orderNos.put(orderNo, orderNo);
+    }
+    public String getLogoFile() {
         return logoFile;
     }
     public void setLogoFile(String logoFile) {

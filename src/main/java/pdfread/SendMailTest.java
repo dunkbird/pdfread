@@ -31,33 +31,33 @@ import javax.mail.internet.MimeUtility;
 import com.sun.mail.util.MailSSLSocketFactory;
 
 /**
- * ä½¿ç”¨SMTPåè®®å‘é€ç”µå­é‚®ä»¶
+ * Ê¹ÓÃSMTPĞ­Òé·¢ËÍµç×ÓÓÊ¼ş
  */
 public class SendMailTest {
 
-    // é‚®ä»¶å‘é€åè®®
+    // ÓÊ¼ş·¢ËÍĞ­Òé
     private static String PROTOCOL = "smtp";
 
-    // SMTPé‚®ä»¶æœåŠ¡å™¨
+    // SMTPÓÊ¼ş·şÎñÆ÷
     private static String HOST = "smtp.qq.com";
 
-    // SMTPé‚®ä»¶æœåŠ¡å™¨é»˜è®¤ç«¯å£
+    // SMTPÓÊ¼ş·şÎñÆ÷Ä¬ÈÏ¶Ë¿Ú
     private static String PORT = "465";
 
-    // æ˜¯å¦è¦æ±‚èº«ä»½è®¤è¯
+    // ÊÇ·ñÒªÇóÉí·İÈÏÖ¤
     private static String IS_AUTH = "true";
 
-    // æ˜¯å¦å¯ç”¨è°ƒè¯•æ¨¡å¼ï¼ˆå¯ç”¨è°ƒè¯•æ¨¡å¼å¯æ‰“å°å®¢æˆ·ç«¯ä¸æœåŠ¡å™¨äº¤äº’è¿‡ç¨‹æ—¶ä¸€é—®ä¸€ç­”çš„å“åº”æ¶ˆæ¯ï¼‰
+    // ÊÇ·ñÆôÓÃµ÷ÊÔÄ£Ê½£¨ÆôÓÃµ÷ÊÔÄ£Ê½¿É´òÓ¡¿Í»§¶ËÓë·şÎñÆ÷½»»¥¹ı³ÌÊ±Ò»ÎÊÒ»´ğµÄÏìÓ¦ÏûÏ¢£©
     private static String IS_ENABLED_DEBUG_MOD = "true";
 
-    // å‘ä»¶äºº
+    // ·¢¼şÈË
     private static String from = "93091620@qq.com";
     private static String cc = "93091620@qq.com";
     
     private static String user = "";
     private static String password = "abcd@1234";
 
-    // æ”¶ä»¶äºº
+    // ÊÕ¼şÈË
     private static String to = "zhen.wang2012@hotmail.com";
 
     public static void loadProps(String file) throws Exception {
@@ -96,7 +96,7 @@ public class SendMailTest {
         props.setProperty("mail.smtp.port", PORT);
         props.setProperty("mail.smtp.auth", IS_AUTH);
         props.setProperty("mail.debug", IS_ENABLED_DEBUG_MOD);
-        props.setProperty("mail.smtp.auth", "true");// å¿…é¡» æ™®é€šå®¢æˆ·ç«¯
+        props.setProperty("mail.smtp.auth", "true");// ±ØĞë ÆÕÍ¨¿Í»§¶Ë
         props.put("mail.debug", "true");
         props.put("mail.debug.auth", "true");
         //
@@ -115,19 +115,19 @@ public class SendMailTest {
     }
 
     public static void main(String[] args) throws Exception {
-        // å‘é€æ–‡æœ¬é‚®ä»¶
+        // ·¢ËÍÎÄ±¾ÓÊ¼ş
         sendTextEmail();
 
-        // å‘é€ç®€å•çš„htmlé‚®ä»¶
+        // ·¢ËÍ¼òµ¥µÄhtmlÓÊ¼ş
         // sendHtmlEmail();
 
         sendHtmlWithInnerImageEmail();
 
         System.out.println(Thread.currentThread().getContextClassLoader()
                 .getResource("firefoxlogo.png").getPath());
-        System.out.println(ClassLoader.getSystemResource("å¦‚ä½•å­¦å¥½Cè¯­è¨€.txt"));
+        System.out.println(ClassLoader.getSystemResource("ÈçºÎÑ§ºÃCÓïÑÔ.txt"));
         System.out.println(Thread.currentThread().getContextClassLoader()
-                .getResource("å¦‚ä½•å­¦å¥½Cè¯­è¨€.txt").getPath());
+                .getResource("ÈçºÎÑ§ºÃCÓïÑÔ.txt").getPath());
         Properties iframeproperties = new Properties();
         ClassLoader classloader = Thread.currentThread()
                 .getContextClassLoader();
@@ -137,118 +137,118 @@ public class SendMailTest {
         if (true) {
             System.exit(0);
         }
-        // å‘é€å¸¦å†…åµŒå›¾ç‰‡çš„HTMLé‚®ä»¶
+        // ·¢ËÍ´øÄÚÇ¶Í¼Æ¬µÄHTMLÓÊ¼ş
         // sendHtmlWithInnerImageEmail();
 
-        // å‘é€æ··åˆç»„åˆé‚®ä»¶
+        // ·¢ËÍ»ìºÏ×éºÏÓÊ¼ş
         sendMultipleEmail_back();
 
-        // å‘é€å·²ç»ç”Ÿæˆçš„emlé‚®ä»¶
+        // ·¢ËÍÒÑ¾­Éú³ÉµÄemlÓÊ¼ş
         // sendMailForEml();
     }
 
     /**
-     * å‘é€ç®€å•çš„æ–‡æœ¬é‚®ä»¶
+     * ·¢ËÍ¼òµ¥µÄÎÄ±¾ÓÊ¼ş
      */
     public static void sendTextEmail() throws Exception {
-        // åˆ›å»ºSessionå®ä¾‹å¯¹è±¡
+        // ´´½¨SessionÊµÀı¶ÔÏó
         Properties props = getProps();
         Session session = Session.getDefaultInstance(props);
 
-        // åˆ›å»ºMimeMessageå®ä¾‹å¯¹è±¡
+        // ´´½¨MimeMessageÊµÀı¶ÔÏó
         MimeMessage message = new MimeMessage(session);
-        // è®¾ç½®å‘ä»¶äºº
+        // ÉèÖÃ·¢¼şÈË
         message.setFrom(new InternetAddress(from));
-        // è®¾ç½®é‚®ä»¶ä¸»é¢˜
-        message.setSubject("ä½¿ç”¨javamailå‘é€ç®€å•æ–‡æœ¬é‚®ä»¶");
-        // è®¾ç½®æ”¶ä»¶äºº
+        // ÉèÖÃÓÊ¼şÖ÷Ìâ
+        message.setSubject("Ê¹ÓÃjavamail·¢ËÍ¼òµ¥ÎÄ±¾ÓÊ¼ş");
+        // ÉèÖÃÊÕ¼şÈË
         message.setRecipient(RecipientType.TO, new InternetAddress(to));
-        // è®¾ç½®å‘é€æ—¶é—´
+        // ÉèÖÃ·¢ËÍÊ±¼ä
         message.setSentDate(new Date());
-        // è®¾ç½®çº¯æ–‡æœ¬å†…å®¹ä¸ºé‚®ä»¶æ­£æ–‡
-        message.setText("ä½¿ç”¨POP3åè®®å‘é€æ–‡æœ¬é‚®ä»¶æµ‹è¯•!!!");
-        // ä¿å­˜å¹¶ç”Ÿæˆæœ€ç»ˆçš„é‚®ä»¶å†…å®¹
+        // ÉèÖÃ´¿ÎÄ±¾ÄÚÈİÎªÓÊ¼şÕıÎÄ
+        message.setText("Ê¹ÓÃPOP3Ğ­Òé·¢ËÍÎÄ±¾ÓÊ¼ş²âÊÔ!!!");
+        // ±£´æ²¢Éú³É×îÖÕµÄÓÊ¼şÄÚÈİ
         message.saveChanges();
 
-        // è·å¾—Transportå®ä¾‹å¯¹è±¡
+        // »ñµÃTransportÊµÀı¶ÔÏó
         Transport transport = session.getTransport();
-        // æ‰“å¼€è¿æ¥
+        // ´ò¿ªÁ¬½Ó
         transport.connect("93091620", "abcd@1234");
-        // å°†messageå¯¹è±¡ä¼ é€’ç»™transportå¯¹è±¡ï¼Œå°†é‚®ä»¶å‘é€å‡ºå»
+        // ½«message¶ÔÏó´«µİ¸øtransport¶ÔÏó£¬½«ÓÊ¼ş·¢ËÍ³öÈ¥
         transport.sendMessage(message, message.getAllRecipients());
-        // å…³é—­è¿æ¥
+        // ¹Ø±ÕÁ¬½Ó
         transport.close();
     }
 
     /**
-     * å‘é€ç®€å•çš„htmlé‚®ä»¶
+     * ·¢ËÍ¼òµ¥µÄhtmlÓÊ¼ş
      */
     public static void sendHtmlEmail() throws Exception {
         Properties props = getProps();
-        // åˆ›å»ºSessionå®ä¾‹å¯¹è±¡
+        // ´´½¨SessionÊµÀı¶ÔÏó
         Session session = Session.getInstance(props, new MyAuthenticator());
         session.setDebug(true);
 
-        // åˆ›å»ºMimeMessageå®ä¾‹å¯¹è±¡
+        // ´´½¨MimeMessageÊµÀı¶ÔÏó
         MimeMessage message = new MimeMessage(session);
-        // è®¾ç½®é‚®ä»¶ä¸»é¢˜
-        message.setSubject("htmlé‚®ä»¶ä¸»é¢˜");
-        // è®¾ç½®å‘é€äºº
+        // ÉèÖÃÓÊ¼şÖ÷Ìâ
+        message.setSubject("htmlÓÊ¼şÖ÷Ìâ");
+        // ÉèÖÃ·¢ËÍÈË
         message.setFrom(new InternetAddress(from));
-        // è®¾ç½®å‘é€æ—¶é—´
+        // ÉèÖÃ·¢ËÍÊ±¼ä
         message.setSentDate(new Date());
-        // è®¾ç½®æ”¶ä»¶äºº
+        // ÉèÖÃÊÕ¼şÈË
         message.setRecipients(RecipientType.TO, InternetAddress.parse(to));
-        // è®¾ç½®htmlå†…å®¹ä¸ºé‚®ä»¶æ­£æ–‡ï¼ŒæŒ‡å®šMIMEç±»å‹ä¸ºtext/htmlç±»å‹ï¼Œå¹¶æŒ‡å®šå­—ç¬¦ç¼–ç ä¸ºgbk
-        message.setContent("<span style='color:red;'>htmlé‚®ä»¶æµ‹è¯•...</span>",
+        // ÉèÖÃhtmlÄÚÈİÎªÓÊ¼şÕıÎÄ£¬Ö¸¶¨MIMEÀàĞÍÎªtext/htmlÀàĞÍ£¬²¢Ö¸¶¨×Ö·û±àÂëÎªgbk
+        message.setContent("<span style='color:red;'>htmlÓÊ¼ş²âÊÔ...</span>",
                 "text/html;charset=gbk");
 
-        // ä¿å­˜å¹¶ç”Ÿæˆæœ€ç»ˆçš„é‚®ä»¶å†…å®¹
+        // ±£´æ²¢Éú³É×îÖÕµÄÓÊ¼şÄÚÈİ
         message.saveChanges();
 
-        // å‘é€é‚®ä»¶
+        // ·¢ËÍÓÊ¼ş
         Transport.send(message);
     }
 
     /**
-     * å‘é€å¸¦å†…åµŒå›¾ç‰‡çš„HTMLé‚®ä»¶
+     * ·¢ËÍ´øÄÚÇ¶Í¼Æ¬µÄHTMLÓÊ¼ş
      */
     public static void sendHtmlWithInnerImageEmail() throws Exception {
         Properties props = getProps();
-        // åˆ›å»ºSessionå®ä¾‹å¯¹è±¡
+        // ´´½¨SessionÊµÀı¶ÔÏó
         Session session = Session.getDefaultInstance(props,
                 new MyAuthenticator());
 
-        // åˆ›å»ºé‚®ä»¶å†…å®¹
+        // ´´½¨ÓÊ¼şÄÚÈİ
         MimeMessage message = new MimeMessage(session);
-        // é‚®ä»¶ä¸»é¢˜,å¹¶æŒ‡å®šç¼–ç æ ¼å¼
-        message.setSubject("å¸¦å†…åµŒå›¾ç‰‡çš„HTMLé‚®ä»¶", "utf-8");
-        // å‘ä»¶äºº
+        // ÓÊ¼şÖ÷Ìâ,²¢Ö¸¶¨±àÂë¸ñÊ½
+        message.setSubject("´øÄÚÇ¶Í¼Æ¬µÄHTMLÓÊ¼ş", "utf-8");
+        // ·¢¼şÈË
         message.setFrom(new InternetAddress(from));
-        // æ”¶ä»¶äºº
+        // ÊÕ¼şÈË
         message.setRecipients(RecipientType.TO, InternetAddress.parse(to));
-        // æŠ„é€
+        // ³­ËÍ
         message.setRecipient(RecipientType.CC, new InternetAddress(
                 "zhen.wang2012@hotmail.com"));
-        // å¯†é€ (ä¸ä¼šåœ¨é‚®ä»¶æ”¶ä»¶äººåå•ä¸­æ˜¾ç¤ºå‡ºæ¥)
+        // ÃÜËÍ (²»»áÔÚÓÊ¼şÊÕ¼şÈËÃûµ¥ÖĞÏÔÊ¾³öÀ´)
         message.setRecipient(RecipientType.BCC, new InternetAddress(
                 "93091620@qq.com"));
-        // å‘é€æ—¶é—´
+        // ·¢ËÍÊ±¼ä
         message.setSentDate(new Date());
 
-        // åˆ›å»ºä¸€ä¸ªMIMEå­ç±»å‹ä¸ºâ€œrelatedâ€çš„MimeMultipartå¯¹è±¡
+        // ´´½¨Ò»¸öMIME×ÓÀàĞÍÎª¡°related¡±µÄMimeMultipart¶ÔÏó
         MimeMultipart mp = new MimeMultipart("related");
-        // åˆ›å»ºä¸€ä¸ªè¡¨ç¤ºæ­£æ–‡çš„MimeBodyPartå¯¹è±¡ï¼Œå¹¶å°†å®ƒåŠ å…¥åˆ°å‰é¢åˆ›å»ºçš„MimeMultipartå¯¹è±¡ä¸­
+        // ´´½¨Ò»¸ö±íÊ¾ÕıÎÄµÄMimeBodyPart¶ÔÏó£¬²¢½«Ëü¼ÓÈëµ½Ç°Ãæ´´½¨µÄMimeMultipart¶ÔÏóÖĞ
         MimeBodyPart htmlPart = new MimeBodyPart();
         mp.addBodyPart(htmlPart);
-        // åˆ›å»ºä¸€ä¸ªè¡¨ç¤ºå›¾ç‰‡èµ„æºçš„MimeBodyPartå¯¹è±¡ï¼Œå°†å°†å®ƒåŠ å…¥åˆ°å‰é¢åˆ›å»ºçš„MimeMultipartå¯¹è±¡ä¸­
+        // ´´½¨Ò»¸ö±íÊ¾Í¼Æ¬×ÊÔ´µÄMimeBodyPart¶ÔÏó£¬½«½«Ëü¼ÓÈëµ½Ç°Ãæ´´½¨µÄMimeMultipart¶ÔÏóÖĞ
         MimeBodyPart imagePart = new MimeBodyPart();
         mp.addBodyPart(imagePart);
 
-        // å°†MimeMultipartå¯¹è±¡è®¾ç½®ä¸ºæ•´ä¸ªé‚®ä»¶çš„å†…å®¹
+        // ½«MimeMultipart¶ÔÏóÉèÖÃÎªÕû¸öÓÊ¼şµÄÄÚÈİ
         message.setContent(mp);
 
-        // è®¾ç½®å†…åµŒå›¾ç‰‡é‚®ä»¶ä½“
+        // ÉèÖÃÄÚÇ¶Í¼Æ¬ÓÊ¼şÌå
         System.out.println(Thread.currentThread().getContextClassLoader()
                 .getResource("firefoxlogo.png"));
         DataSource ds = new FileDataSource(new File(Thread.currentThread()
@@ -256,76 +256,76 @@ public class SendMailTest {
                 .getPath()));
         DataHandler dh = new DataHandler(ds);
         imagePart.setDataHandler(dh);
-        imagePart.setContentID("firefoxlogo.png"); // è®¾ç½®å†…å®¹ç¼–å·,ç”¨äºå…¶å®ƒé‚®ä»¶ä½“å¼•ç”¨
+        imagePart.setContentID("firefoxlogo.png"); // ÉèÖÃÄÚÈİ±àºÅ,ÓÃÓÚÆäËüÓÊ¼şÌåÒıÓÃ
 
-        // åˆ›å»ºä¸€ä¸ªMIMEå­ç±»å‹ä¸º"alternative"çš„MimeMultipartå¯¹è±¡ï¼Œå¹¶ä½œä¸ºå‰é¢åˆ›å»ºçš„htmlPartå¯¹è±¡çš„é‚®ä»¶å†…å®¹
+        // ´´½¨Ò»¸öMIME×ÓÀàĞÍÎª"alternative"µÄMimeMultipart¶ÔÏó£¬²¢×÷ÎªÇ°Ãæ´´½¨µÄhtmlPart¶ÔÏóµÄÓÊ¼şÄÚÈİ
         MimeMultipart htmlMultipart = new MimeMultipart("alternative");
-        // åˆ›å»ºä¸€ä¸ªè¡¨ç¤ºhtmlæ­£æ–‡çš„MimeBodyPartå¯¹è±¡
+        // ´´½¨Ò»¸ö±íÊ¾htmlÕıÎÄµÄMimeBodyPart¶ÔÏó
         MimeBodyPart htmlBodypart = new MimeBodyPart();
-        // å…¶ä¸­cid=androidlogo.gifæ˜¯å¼•ç”¨é‚®ä»¶å†…éƒ¨çš„å›¾ç‰‡ï¼Œå³imagePart.setContentID("androidlogo.gif");æ–¹æ³•æ‰€ä¿å­˜çš„å›¾ç‰‡
+        // ÆäÖĞcid=androidlogo.gifÊÇÒıÓÃÓÊ¼şÄÚ²¿µÄÍ¼Æ¬£¬¼´imagePart.setContentID("androidlogo.gif");·½·¨Ëù±£´æµÄÍ¼Æ¬
         htmlBodypart
                 .setContent(
-                        "<span style='color:red;'>è¿™æ˜¯å¸¦å†…åµŒå›¾ç‰‡çš„HTMLé‚®ä»¶å“¦ï¼ï¼ï¼<img src=\"cid:firefoxlogo.png\" /></span>",
+                        "<span style='color:red;'>ÕâÊÇ´øÄÚÇ¶Í¼Æ¬µÄHTMLÓÊ¼şÅ¶£¡£¡£¡<img src=\"cid:firefoxlogo.png\" /></span>",
                         "text/html;charset=utf-8");
         htmlMultipart.addBodyPart(htmlBodypart);
         htmlPart.setContent(htmlMultipart);
 
-        // ä¿å­˜å¹¶ç”Ÿæˆæœ€ç»ˆçš„é‚®ä»¶å†…å®¹
+        // ±£´æ²¢Éú³É×îÖÕµÄÓÊ¼şÄÚÈİ
         message.saveChanges();
 
-        // å‘é€é‚®ä»¶
+        // ·¢ËÍÓÊ¼ş
         Transport.send(message);
     }
 
     /**
-     * å‘é€å¸¦å†…åµŒå›¾ç‰‡ã€é™„ä»¶ã€å¤šæ”¶ä»¶äºº(æ˜¾ç¤ºé‚®ç®±å§“å)ã€é‚®ä»¶ä¼˜å…ˆçº§ã€é˜…è¯»å›æ‰§çš„å®Œæ•´çš„HTMLé‚®ä»¶
+     * ·¢ËÍ´øÄÚÇ¶Í¼Æ¬¡¢¸½¼ş¡¢¶àÊÕ¼şÈË(ÏÔÊ¾ÓÊÏäĞÕÃû)¡¢ÓÊ¼şÓÅÏÈ¼¶¡¢ÔÄ¶Á»ØÖ´µÄÍêÕûµÄHTMLÓÊ¼ş
      */
     public static void sendMultipleEmail(MailMode mailMode) throws Exception {
         Properties props = getProps();
 
-        String charset = "utf-8"; // æŒ‡å®šä¸­æ–‡ç¼–ç æ ¼å¼
-        // åˆ›å»ºSessionå®ä¾‹å¯¹è±¡
+        String charset = "utf-8"; // Ö¸¶¨ÖĞÎÄ±àÂë¸ñÊ½
+        // ´´½¨SessionÊµÀı¶ÔÏó
         Session session = Session.getInstance(props, new MyAuthenticator());
 
-        // åˆ›å»ºMimeMessageå®ä¾‹å¯¹è±¡
+        // ´´½¨MimeMessageÊµÀı¶ÔÏó
         MimeMessage message = new MimeMessage(session);
-        // è®¾ç½®ä¸»é¢˜
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");// è®¾ç½®æ—¥æœŸæ ¼å¼
-        message.setSubject("DHLæŠ¥å…³å•(" + df.format(new Date()) +")");
-        // è®¾ç½®å‘é€äºº
-        message.setFrom(new InternetAddress(from, "ä¸­å¤–è¿-æ•¦è±ªè¾½å®åˆ†å…¬å¸",
+        // ÉèÖÃÖ÷Ìâ
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");// ÉèÖÃÈÕÆÚ¸ñÊ½
+        message.setSubject("DHL±¨¹Øµ¥(" + df.format(new Date()) +")");
+        // ÉèÖÃ·¢ËÍÈË
+        message.setFrom(new InternetAddress(from, "ÖĞÍâÔË-¶ØºÀÁÉÄş·Ö¹«Ë¾",
                 charset));
-        // è®¾ç½®æ”¶ä»¶äºº
+        // ÉèÖÃÊÕ¼şÈË
         message.setRecipients(RecipientType.TO, new Address[] {
-        // å‚æ•°1ï¼šé‚®ç®±åœ°å€ï¼Œå‚æ•°2ï¼šå§“åï¼ˆåœ¨å®¢æˆ·ç«¯æ”¶ä»¶åªæ˜¾ç¤ºå§“åï¼Œè€Œä¸æ˜¾ç¤ºé‚®ä»¶åœ°å€ï¼‰ï¼Œå‚æ•°3ï¼šå§“åä¸­æ–‡å­—ç¬¦ä¸²ç¼–ç 
+        // ²ÎÊı1£ºÓÊÏäµØÖ·£¬²ÎÊı2£ºĞÕÃû£¨ÔÚ¿Í»§¶ËÊÕ¼şÖ»ÏÔÊ¾ĞÕÃû£¬¶ø²»ÏÔÊ¾ÓÊ¼şµØÖ·£©£¬²ÎÊı3£ºĞÕÃûÖĞÎÄ×Ö·û´®±àÂë
                 new InternetAddress(mailMode.getTo(), "", charset), });
-        // è®¾ç½®æŠ„é€
+        // ÉèÖÃ³­ËÍ
         message.setRecipient(RecipientType.CC,
                 new InternetAddress(cc, "", charset));
-        // è®¾ç½®å¯†é€
+        // ÉèÖÃÃÜËÍ
         // message.setRecipient(RecipientType.BCC, new
-        // InternetAddress("93091620@qq.com", "èµµå…­_QQ", charset));
-        // è®¾ç½®å‘é€æ—¶é—´
+        // InternetAddress("93091620@qq.com", "ÕÔÁù_QQ", charset));
+        // ÉèÖÃ·¢ËÍÊ±¼ä
         message.setSentDate(new Date());
-        // è®¾ç½®å›å¤äºº(æ”¶ä»¶äººå›å¤æ­¤é‚®ä»¶æ—¶,é»˜è®¤æ”¶ä»¶äºº)
+        // ÉèÖÃ»Ø¸´ÈË(ÊÕ¼şÈË»Ø¸´´ËÓÊ¼şÊ±,Ä¬ÈÏÊÕ¼şÈË)
          message.setReplyTo(InternetAddress.parse("\"" +
          MimeUtility.encodeText("") + "\" <" + cc + ">"));
-        // è®¾ç½®ä¼˜å…ˆçº§(1:ç´§æ€¥ 3:æ™®é€š 5:ä½)
+        // ÉèÖÃÓÅÏÈ¼¶(1:½ô¼± 3:ÆÕÍ¨ 5:µÍ)
         message.setHeader("X-Priority", "3");
-        // è¦æ±‚é˜…è¯»å›æ‰§(æ”¶ä»¶äººé˜…è¯»é‚®ä»¶æ—¶ä¼šæç¤ºå›å¤å‘ä»¶äºº,è¡¨æ˜é‚®ä»¶å·²æ”¶åˆ°,å¹¶å·²é˜…è¯»)
+        // ÒªÇóÔÄ¶Á»ØÖ´(ÊÕ¼şÈËÔÄ¶ÁÓÊ¼şÊ±»áÌáÊ¾»Ø¸´·¢¼şÈË,±íÃ÷ÓÊ¼şÒÑÊÕµ½,²¢ÒÑÔÄ¶Á)
         // message.setHeader("Disposition-Notification-To", from);
 
-        // åˆ›å»ºä¸€ä¸ªMIMEå­ç±»å‹ä¸º"mixed"çš„MimeMultipartå¯¹è±¡ï¼Œè¡¨ç¤ºè¿™æ˜¯ä¸€å°æ··åˆç»„åˆç±»å‹çš„é‚®ä»¶
+        // ´´½¨Ò»¸öMIME×ÓÀàĞÍÎª"mixed"µÄMimeMultipart¶ÔÏó£¬±íÊ¾ÕâÊÇÒ»·â»ìºÏ×éºÏÀàĞÍµÄÓÊ¼ş
         MimeMultipart mailContent = new MimeMultipart("mixed");
         message.setContent(mailContent);
 
         for (String attachFile : mailMode.getAttachFiles()) {
-            // é™„ä»¶
+            // ¸½¼ş
             MimeBodyPart attach1 = new MimeBodyPart();
 
-            // å°†é™„ä»¶å’Œå†…å®¹æ·»åŠ åˆ°é‚®ä»¶å½“ä¸­
+            // ½«¸½¼şºÍÄÚÈİÌí¼Óµ½ÓÊ¼şµ±ÖĞ
             mailContent.addBodyPart(attach1);
-            // é™„ä»¶1(åˆ©ç”¨jafæ¡†æ¶è¯»å–æ•°æ®æºç”Ÿæˆé‚®ä»¶ä½“)
+            // ¸½¼ş1(ÀûÓÃjaf¿ò¼Ü¶ÁÈ¡Êı¾İÔ´Éú³ÉÓÊ¼şÌå)
             File attachFileObj = new File(attachFile);
             DataSource ds1 = new FileDataSource(attachFileObj);
             DataHandler dh1 = new DataHandler(ds1);
@@ -335,29 +335,29 @@ public class SendMailTest {
             attach1.setFileName(MimeUtility.encodeText(attachFileName));
             attach1.setDataHandler(dh1);
         }
-        // å†…å®¹
+        // ÄÚÈİ
         MimeBodyPart mailBody = new MimeBodyPart();
 
         mailContent.addBodyPart(mailBody);
 
-        // é‚®ä»¶æ­£æ–‡(å†…åµŒå›¾ç‰‡+htmlæ–‡æœ¬)
-        MimeMultipart body = new MimeMultipart("related"); // é‚®ä»¶æ­£æ–‡ä¹Ÿæ˜¯ä¸€ä¸ªç»„åˆä½“,éœ€è¦æŒ‡æ˜ç»„åˆå…³ç³»
+        // ÓÊ¼şÕıÎÄ(ÄÚÇ¶Í¼Æ¬+htmlÎÄ±¾)
+        MimeMultipart body = new MimeMultipart("related"); // ÓÊ¼şÕıÎÄÒ²ÊÇÒ»¸ö×éºÏÌå,ĞèÒªÖ¸Ã÷×éºÏ¹ØÏµ
         mailBody.setContent(body);
 
-        // é‚®ä»¶æ­£æ–‡ç”±htmlå’Œå›¾ç‰‡æ„æˆ
+        // ÓÊ¼şÕıÎÄÓÉhtmlºÍÍ¼Æ¬¹¹³É
         MimeBodyPart imgPart = new MimeBodyPart();
         MimeBodyPart htmlPart = new MimeBodyPart();
         body.addBodyPart(imgPart);
         body.addBodyPart(htmlPart);
 
-        // æ­£æ–‡å›¾ç‰‡
+        // ÕıÎÄÍ¼Æ¬
         DataSource ds3 = new FileDataSource(mailMode.getLogoFile());
         DataHandler dh3 = new DataHandler(ds3);
         imgPart.setDataHandler(dh3);
         String logoFileName = new File(mailMode.getLogoFile()).getName();
         imgPart.setContentID(logoFileName);
 
-        // htmlé‚®ä»¶å†…å®¹
+        // htmlÓÊ¼şÄÚÈİ
         MimeMultipart htmlMultipart = new MimeMultipart("alternative");
         htmlPart.setContent(htmlMultipart);
         MimeBodyPart htmlContent = new MimeBodyPart();
@@ -367,96 +367,96 @@ public class SendMailTest {
                 "text/html;charset=utf-8");
         htmlMultipart.addBodyPart(htmlContent);
 
-        // ä¿å­˜é‚®ä»¶å†…å®¹ä¿®æ”¹
+        // ±£´æÓÊ¼şÄÚÈİĞŞ¸Ä
         message.saveChanges();
 
         /*
          * File eml = buildEmlFile(message); sendMailForEml(eml);
          */
 
-        // å‘é€é‚®ä»¶
+        // ·¢ËÍÓÊ¼ş
         Transport.send(message);
     }
 
     /**
-     * å‘é€å¸¦å†…åµŒå›¾ç‰‡ã€é™„ä»¶ã€å¤šæ”¶ä»¶äºº(æ˜¾ç¤ºé‚®ç®±å§“å)ã€é‚®ä»¶ä¼˜å…ˆçº§ã€é˜…è¯»å›æ‰§çš„å®Œæ•´çš„HTMLé‚®ä»¶
+     * ·¢ËÍ´øÄÚÇ¶Í¼Æ¬¡¢¸½¼ş¡¢¶àÊÕ¼şÈË(ÏÔÊ¾ÓÊÏäĞÕÃû)¡¢ÓÊ¼şÓÅÏÈ¼¶¡¢ÔÄ¶Á»ØÖ´µÄÍêÕûµÄHTMLÓÊ¼ş
      */
     public static void sendMultipleEmail_back() throws Exception {
         Properties props = getProps();
-        String charset = "utf-8"; // æŒ‡å®šä¸­æ–‡ç¼–ç æ ¼å¼
-        // åˆ›å»ºSessionå®ä¾‹å¯¹è±¡
+        String charset = "utf-8"; // Ö¸¶¨ÖĞÎÄ±àÂë¸ñÊ½
+        // ´´½¨SessionÊµÀı¶ÔÏó
         Session session = Session.getInstance(props, new MyAuthenticator());
 
-        // åˆ›å»ºMimeMessageå®ä¾‹å¯¹è±¡
+        // ´´½¨MimeMessageÊµÀı¶ÔÏó
         MimeMessage message = new MimeMessage(session);
-        // è®¾ç½®ä¸»é¢˜
-        message.setSubject("ä½¿ç”¨JavaMailå‘é€æ··åˆç»„åˆç±»å‹çš„é‚®ä»¶æµ‹è¯•");
-        // è®¾ç½®å‘é€äºº
-        message.setFrom(new InternetAddress(from, "æ–°æµªæµ‹è¯•é‚®ç®±", charset));
-        // è®¾ç½®æ”¶ä»¶äºº
+        // ÉèÖÃÖ÷Ìâ
+        message.setSubject("Ê¹ÓÃJavaMail·¢ËÍ»ìºÏ×éºÏÀàĞÍµÄÓÊ¼ş²âÊÔ");
+        // ÉèÖÃ·¢ËÍÈË
+        message.setFrom(new InternetAddress(from, "ĞÂÀË²âÊÔÓÊÏä", charset));
+        // ÉèÖÃÊÕ¼şÈË
         message.setRecipients(RecipientType.TO, new Address[] {
-                // å‚æ•°1ï¼šé‚®ç®±åœ°å€ï¼Œå‚æ•°2ï¼šå§“åï¼ˆåœ¨å®¢æˆ·ç«¯æ”¶ä»¶åªæ˜¾ç¤ºå§“åï¼Œè€Œä¸æ˜¾ç¤ºé‚®ä»¶åœ°å€ï¼‰ï¼Œå‚æ•°3ï¼šå§“åä¸­æ–‡å­—ç¬¦ä¸²ç¼–ç 
-                new InternetAddress("zhen.wang2012@hotmail.com", "å¼ ä¸‰_sohu",
+                // ²ÎÊı1£ºÓÊÏäµØÖ·£¬²ÎÊı2£ºĞÕÃû£¨ÔÚ¿Í»§¶ËÊÕ¼şÖ»ÏÔÊ¾ĞÕÃû£¬¶ø²»ÏÔÊ¾ÓÊ¼şµØÖ·£©£¬²ÎÊı3£ºĞÕÃûÖĞÎÄ×Ö·û´®±àÂë
+                new InternetAddress("zhen.wang2012@hotmail.com", "ÕÅÈı_sohu",
                         charset),
-                new InternetAddress("zhen.wang2012@hotmail.com", "æå››_163",
+                new InternetAddress("zhen.wang2012@hotmail.com", "ÀîËÄ_163",
                         charset),
-                new InternetAddress("93091620@qq.com", "ç‹äº”_qq", charset) });
-        // è®¾ç½®æŠ„é€
+                new InternetAddress("93091620@qq.com", "ÍõÎå_qq", charset) });
+        // ÉèÖÃ³­ËÍ
         message.setRecipient(RecipientType.CC, new InternetAddress(
-                "zhen.wang2012@hotmail.com", "ç‹äº”_gmail", charset));
-        // è®¾ç½®å¯†é€
+                "zhen.wang2012@hotmail.com", "ÍõÎå_gmail", charset));
+        // ÉèÖÃÃÜËÍ
         message.setRecipient(RecipientType.BCC, new InternetAddress(
-                "93091620@qq.com", "èµµå…­_QQ", charset));
-        // è®¾ç½®å‘é€æ—¶é—´
+                "93091620@qq.com", "ÕÔÁù_QQ", charset));
+        // ÉèÖÃ·¢ËÍÊ±¼ä
         message.setSentDate(new Date());
-        // è®¾ç½®å›å¤äºº(æ”¶ä»¶äººå›å¤æ­¤é‚®ä»¶æ—¶,é»˜è®¤æ”¶ä»¶äºº)
+        // ÉèÖÃ»Ø¸´ÈË(ÊÕ¼şÈË»Ø¸´´ËÓÊ¼şÊ±,Ä¬ÈÏÊÕ¼şÈË)
         message.setReplyTo(InternetAddress.parse("\""
-                + MimeUtility.encodeText("ç”°ä¸ƒ") + "\" <93091620@qq.com>"));
-        // è®¾ç½®ä¼˜å…ˆçº§(1:ç´§æ€¥ 3:æ™®é€š 5:ä½)
+                + MimeUtility.encodeText("ÌïÆß") + "\" <93091620@qq.com>"));
+        // ÉèÖÃÓÅÏÈ¼¶(1:½ô¼± 3:ÆÕÍ¨ 5:µÍ)
         message.setHeader("X-Priority", "1");
-        // è¦æ±‚é˜…è¯»å›æ‰§(æ”¶ä»¶äººé˜…è¯»é‚®ä»¶æ—¶ä¼šæç¤ºå›å¤å‘ä»¶äºº,è¡¨æ˜é‚®ä»¶å·²æ”¶åˆ°,å¹¶å·²é˜…è¯»)
+        // ÒªÇóÔÄ¶Á»ØÖ´(ÊÕ¼şÈËÔÄ¶ÁÓÊ¼şÊ±»áÌáÊ¾»Ø¸´·¢¼şÈË,±íÃ÷ÓÊ¼şÒÑÊÕµ½,²¢ÒÑÔÄ¶Á)
         message.setHeader("Disposition-Notification-To", from);
 
-        // åˆ›å»ºä¸€ä¸ªMIMEå­ç±»å‹ä¸º"mixed"çš„MimeMultipartå¯¹è±¡ï¼Œè¡¨ç¤ºè¿™æ˜¯ä¸€å°æ··åˆç»„åˆç±»å‹çš„é‚®ä»¶
+        // ´´½¨Ò»¸öMIME×ÓÀàĞÍÎª"mixed"µÄMimeMultipart¶ÔÏó£¬±íÊ¾ÕâÊÇÒ»·â»ìºÏ×éºÏÀàĞÍµÄÓÊ¼ş
         MimeMultipart mailContent = new MimeMultipart("mixed");
         message.setContent(mailContent);
 
-        // é™„ä»¶
+        // ¸½¼ş
         MimeBodyPart attach1 = new MimeBodyPart();
         MimeBodyPart attach2 = new MimeBodyPart();
-        // å†…å®¹
+        // ÄÚÈİ
         MimeBodyPart mailBody = new MimeBodyPart();
 
-        // å°†é™„ä»¶å’Œå†…å®¹æ·»åŠ åˆ°é‚®ä»¶å½“ä¸­
+        // ½«¸½¼şºÍÄÚÈİÌí¼Óµ½ÓÊ¼şµ±ÖĞ
         mailContent.addBodyPart(attach1);
         mailContent.addBodyPart(attach2);
         mailContent.addBodyPart(mailBody);
 
-        // é™„ä»¶1(åˆ©ç”¨jafæ¡†æ¶è¯»å–æ•°æ®æºç”Ÿæˆé‚®ä»¶ä½“)
+        // ¸½¼ş1(ÀûÓÃjaf¿ò¼Ü¶ÁÈ¡Êı¾İÔ´Éú³ÉÓÊ¼şÌå)
         DataSource ds1 = new FileDataSource(new File(Thread.currentThread()
                 .getContextClassLoader().getResource("Earth.bmp").getPath()));
         DataHandler dh1 = new DataHandler(ds1);
         attach1.setFileName(MimeUtility.encodeText("Earth.bmp"));
         attach1.setDataHandler(dh1);
 
-        // é™„ä»¶2
+        // ¸½¼ş2
         DataSource ds2 = new FileDataSource(new File(Thread.currentThread()
                 .getContextClassLoader().getResource("aa.txt").getPath()));
         DataHandler dh2 = new DataHandler(ds2);
         attach2.setDataHandler(dh2);
-        attach2.setFileName(MimeUtility.encodeText("å¦‚ä½•å­¦å¥½Cè¯­è¨€.txt"));
+        attach2.setFileName(MimeUtility.encodeText("ÈçºÎÑ§ºÃCÓïÑÔ.txt"));
 
-        // é‚®ä»¶æ­£æ–‡(å†…åµŒå›¾ç‰‡+htmlæ–‡æœ¬)
-        MimeMultipart body = new MimeMultipart("related"); // é‚®ä»¶æ­£æ–‡ä¹Ÿæ˜¯ä¸€ä¸ªç»„åˆä½“,éœ€è¦æŒ‡æ˜ç»„åˆå…³ç³»
+        // ÓÊ¼şÕıÎÄ(ÄÚÇ¶Í¼Æ¬+htmlÎÄ±¾)
+        MimeMultipart body = new MimeMultipart("related"); // ÓÊ¼şÕıÎÄÒ²ÊÇÒ»¸ö×éºÏÌå,ĞèÒªÖ¸Ã÷×éºÏ¹ØÏµ
         mailBody.setContent(body);
 
-        // é‚®ä»¶æ­£æ–‡ç”±htmlå’Œå›¾ç‰‡æ„æˆ
+        // ÓÊ¼şÕıÎÄÓÉhtmlºÍÍ¼Æ¬¹¹³É
         MimeBodyPart imgPart = new MimeBodyPart();
         MimeBodyPart htmlPart = new MimeBodyPart();
         body.addBodyPart(imgPart);
         body.addBodyPart(htmlPart);
 
-        // æ­£æ–‡å›¾ç‰‡
+        // ÕıÎÄÍ¼Æ¬
         DataSource ds3 = new FileDataSource(Thread.currentThread()
                 .getContextClassLoader().getResource("firefoxlogo.png")
                 .getPath());
@@ -464,31 +464,31 @@ public class SendMailTest {
         imgPart.setDataHandler(dh3);
         imgPart.setContentID("firefoxlogo.png");
 
-        // htmlé‚®ä»¶å†…å®¹
+        // htmlÓÊ¼şÄÚÈİ
         MimeMultipart htmlMultipart = new MimeMultipart("alternative");
         htmlPart.setContent(htmlMultipart);
         MimeBodyPart htmlContent = new MimeBodyPart();
-        htmlContent.setContent("<span style='color:red'>è¿™æ˜¯æˆ‘è‡ªå·±ç”¨java mailå‘é€çš„é‚®ä»¶å“¦ï¼"
+        htmlContent.setContent("<span style='color:red'>ÕâÊÇÎÒ×Ô¼ºÓÃjava mail·¢ËÍµÄÓÊ¼şÅ¶£¡"
                 + "<img src='cid:firefoxlogo.png' /></span>",
                 "text/html;charset=utf-8");
         htmlMultipart.addBodyPart(htmlContent);
 
-        // ä¿å­˜é‚®ä»¶å†…å®¹ä¿®æ”¹
+        // ±£´æÓÊ¼şÄÚÈİĞŞ¸Ä
         message.saveChanges();
 
         /*
          * File eml = buildEmlFile(message); sendMailForEml(eml);
          */
 
-        // å‘é€é‚®ä»¶
+        // ·¢ËÍÓÊ¼ş
         Transport.send(message);
     }
 
     /**
-     * å°†é‚®ä»¶å†…å®¹ç”Ÿæˆemlæ–‡ä»¶
+     * ½«ÓÊ¼şÄÚÈİÉú³ÉemlÎÄ¼ş
      * 
      * @param message
-     *            é‚®ä»¶å†…å®¹
+     *            ÓÊ¼şÄÚÈİ
      */
     public static File buildEmlFile(Message message) throws MessagingException,
             FileNotFoundException, IOException {
@@ -499,21 +499,21 @@ public class SendMailTest {
     }
 
     /**
-     * å‘é€æœ¬åœ°å·²ç»ç”Ÿæˆå¥½çš„emailæ–‡ä»¶
+     * ·¢ËÍ±¾µØÒÑ¾­Éú³ÉºÃµÄemailÎÄ¼ş
      */
     public static void sendMailForEml(File eml) throws Exception {
         Properties props = getProps();
-        // è·å¾—é‚®ä»¶ä¼šè¯
+        // »ñµÃÓÊ¼ş»á»°
         Session session = Session.getInstance(props, new MyAuthenticator());
-        // è·å¾—é‚®ä»¶å†…å®¹,å³å‘ç”Ÿå‰ç”Ÿæˆçš„emlæ–‡ä»¶
+        // »ñµÃÓÊ¼şÄÚÈİ,¼´·¢ÉúÇ°Éú³ÉµÄemlÎÄ¼ş
         InputStream is = new FileInputStream(eml);
         MimeMessage message = new MimeMessage(session, is);
-        // å‘é€é‚®ä»¶
+        // ·¢ËÍÓÊ¼ş
         Transport.send(message);
     }
 
     /**
-     * å‘é‚®ä»¶æœåŠ¡å™¨æäº¤è®¤è¯ä¿¡æ¯
+     * ÏòÓÊ¼ş·şÎñÆ÷Ìá½»ÈÏÖ¤ĞÅÏ¢
      */
     static class MyAuthenticator extends Authenticator {
 

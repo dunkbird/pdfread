@@ -5,14 +5,14 @@ import javax.swing.event.*;
 import java.awt.event.*;
 import java.awt.*;
 /**
- * swingåŸºç¡€å®ä¾‹
+ * swing»ù´¡ÊµÀı
  * @author HZ20232
  *
  */
 public class HelloSwing{
     public static void main(String args[])throws Exception{
         NewFrame1 frame1 = new NewFrame1();
-        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//ä¸€å®šè¦è®¾ç½®å…³é—­
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//Ò»¶¨ÒªÉèÖÃ¹Ø±Õ
 
         frame1.setVisible(true);
     }
@@ -30,30 +30,30 @@ class NewFrame1 extends JFrame{
     public NewFrame1(){
         super();
         this.setSize(300,500);
-        this.getContentPane().setLayout(null);//è®¾ç½®å¸ƒå±€æ§åˆ¶å™¨
+        this.getContentPane().setLayout(null);//ÉèÖÃ²¼¾Ö¿ØÖÆÆ÷
 
-        this.getContentPane().setLayout(new FlowLayout());//è®¾ç½®å¸ƒå±€æ§åˆ¶å™¨
+        this.getContentPane().setLayout(new FlowLayout());//ÉèÖÃ²¼¾Ö¿ØÖÆÆ÷
 
-        this.getContentPane().setLayout(new GridLayout(1,2));//è®¾ç½®å¸ƒå±€æ§åˆ¶å™¨,éœ€è¦ç»™å‡ºè®¾å®šçš„è¡Œåˆ—æ•°ç›®
+        this.getContentPane().setLayout(new GridLayout(1,2));//ÉèÖÃ²¼¾Ö¿ØÖÆÆ÷,ĞèÒª¸ø³öÉè¶¨µÄĞĞÁĞÊıÄ¿
 
-        this.getContentPane().setLayout(new BorderLayout());//è®¾ç½®å¸ƒå±€æ§åˆ¶å™¨ï¼Œä»¥North,South,West,Eastï¼Œæ¥æ§åˆ¶æ§ä»¶å¸ƒå±€
+        this.getContentPane().setLayout(new BorderLayout());//ÉèÖÃ²¼¾Ö¿ØÖÆÆ÷£¬ÒÔNorth,South,West,East£¬À´¿ØÖÆ¿Ø¼ş²¼¾Ö
 
-        this.getContentPane().setLayout(new GridBagLayout());//è®¾ç½®å¸ƒå±€æ§åˆ¶å™¨
+        this.getContentPane().setLayout(new GridBagLayout());//ÉèÖÃ²¼¾Ö¿ØÖÆÆ÷
 
-        this.add(this.getTextField(),null);//æ·»åŠ æ–‡æœ¬æ¡†
+        this.add(this.getTextField(),null);//Ìí¼ÓÎÄ±¾¿ò
 
-        this.add(this.getButton(),null);//æ·»åŠ æŒ‰é’®
+        this.add(this.getButton(),null);//Ìí¼Ó°´Å¥
 
-        this.add(this.getLabel(),null);//æ·»åŠ æ ‡ç­¾
+        this.add(this.getLabel(),null);//Ìí¼Ó±êÇ©
 
-        this.add(this.getBox(),null);//æ·»åŠ ä¸‹æ‹‰åˆ—è¡¨æ¡†
+        this.add(this.getBox(),null);//Ìí¼ÓÏÂÀ­ÁĞ±í¿ò
 
-        this.setJMenuBar(this.getMenu());//æ·»åŠ èœå•
+        this.setJMenuBar(this.getMenu());//Ìí¼Ó²Ëµ¥
 
         this.add(this.getSlider(),null);
         this.add(this.getSpinner(),null);
         this.add(this.getToolBar(),null);
-        this.setTitle("DaLian DHL Report Notice");//è®¾ç½®çª—å£æ ‡é¢˜
+        this.setTitle("DaLian DHL Report Notice");//ÉèÖÃ´°¿Ú±êÌâ
 
     }
     private JToolBar getToolBar(){
@@ -84,41 +84,41 @@ class NewFrame1 extends JFrame{
         return slider;
     }
     /**
-     * èœå•çš„çº§åˆ«JMenuBar->JMenu->JMenuItem
-     * ä¸‰çº§éƒ½æ˜¯1ï¼šnçš„å…³ç³»
-     * æœ€åæ·»åŠ èœå•ç”¨çš„SetJMenuBaræ–¹æ³•
-     * @return å»ºç«‹å¥½çš„èœå•
+     * ²Ëµ¥µÄ¼¶±ğJMenuBar->JMenu->JMenuItem
+     * Èı¼¶¶¼ÊÇ1£ºnµÄ¹ØÏµ
+     * ×îºóÌí¼Ó²Ëµ¥ÓÃµÄSetJMenuBar·½·¨
+     * @return ½¨Á¢ºÃµÄ²Ëµ¥
      */
     private JMenuBar getMenu(){
         if(menuBar==null){
             menuBar = new JMenuBar();
             JMenu m1 = new JMenu();
-            m1.setText("æ–‡ä»¶");
+            m1.setText("ÎÄ¼ş");
             JMenu m2 = new JMenu();
-            m2.setText("ç¼–è¾‘");
+            m2.setText("±à¼­");
             JMenu m3 = new JMenu();
-            m3.setText("å¸®åŠ©");
+            m3.setText("°ïÖú");
             
             JMenuItem item11 = new JMenuItem();
-            item11.setText("æ‰“å¼€");
+            item11.setText("´ò¿ª");
             JMenuItem item12 = new JMenuItem();
-            item12.setText("ä¿å­˜");
+            item12.setText("±£´æ");
             JMenuItem item13 = new JMenuItem();
-            item13.setText("é€€å‡º");
+            item13.setText("ÍË³ö");
             
             JMenuItem item21 = new JMenuItem();
-            item21.setText("å¤åˆ¶");
+            item21.setText("¸´ÖÆ");
             JMenuItem item22 = new JMenuItem();
-            item22.setText("æ‹·è´");
+            item22.setText("¿½±´");
             JMenuItem item23 = new JMenuItem();
-            item23.setText("å‰ªåˆ‡");
+            item23.setText("¼ôÇĞ");
             
             JMenuItem item31 = new JMenuItem();
-            item31.setText("æ¬¢è¿");
+            item31.setText("»¶Ó­");
             JMenuItem item32 = new JMenuItem();
-            item32.setText("æœç´¢");
+            item32.setText("ËÑË÷");
             JMenuItem item33 = new JMenuItem();
-            item33.setText("ç‰ˆæœ¬ä¿¡æ¯");
+            item33.setText("°æ±¾ĞÅÏ¢");
             
             m1.add(item11);
             m1.add(item12);
@@ -139,7 +139,7 @@ class NewFrame1 extends JFrame{
         return menuBar;
     }
     /**
-     * è®¾ç½®ä¸‹æ‹‰åˆ—è¡¨æ¡†
+     * ÉèÖÃÏÂÀ­ÁĞ±í¿ò
      * @return
      */
     private JComboBox getBox(){
@@ -148,7 +148,7 @@ class NewFrame1 extends JFrame{
             box.setBounds(103,140,71,27);
             box.addItem("1");
             box.addItem("2");
-            box.addActionListener(new comboxListener());//ä¸ºä¸‹æ‹‰åˆ—è¡¨æ¡†æ·»åŠ ç›‘å¬å™¨ç±»
+            box.addActionListener(new comboxListener());//ÎªÏÂÀ­ÁĞ±í¿òÌí¼Ó¼àÌıÆ÷Àà
 
         }
         return box;
@@ -160,8 +160,8 @@ class NewFrame1 extends JFrame{
         }
     }
     /**
-     * è®¾ç½®æ ‡ç­¾
-     * @return è®¾ç½®å¥½çš„æ ‡ç­¾
+     * ÉèÖÃ±êÇ©
+     * @return ÉèÖÃºÃµÄ±êÇ©
      */
     private JLabel getLabel(){
         if(label1==null){
@@ -173,8 +173,8 @@ class NewFrame1 extends JFrame{
         return label1;
     }
     /**
-     * è®¾ç½®æŒ‰é’®
-     * @return è®¾ç½®å¥½çš„æŒ‰é’®
+     * ÉèÖÃ°´Å¥
+     * @return ÉèÖÃºÃµÄ°´Å¥
      */
     private JButton getButton(){
         if(button1==null){
@@ -182,13 +182,13 @@ class NewFrame1 extends JFrame{
             button1.setBounds(103,110,71,27);
             button1.setText("OK");
             button1.setToolTipText("OK");
-            button1.addActionListener(new HelloButton());//æ·»åŠ ç›‘å¬å™¨ç±»ï¼Œå…¶ä¸»è¦çš„å“åº”éƒ½ç”±ç›‘å¬å™¨ç±»çš„æ–¹æ³•å®ç°
+            button1.addActionListener(new HelloButton());//Ìí¼Ó¼àÌıÆ÷Àà£¬ÆäÖ÷ÒªµÄÏìÓ¦¶¼ÓÉ¼àÌıÆ÷ÀàµÄ·½·¨ÊµÏÖ
 
         }
         return button1;
     }
     /**
-     * ç›‘å¬å™¨ç±»å®ç°ActionListeneræ¥å£ï¼Œä¸»è¦å®ç°actionPerformedæ–¹æ³•
+     * ¼àÌıÆ÷ÀàÊµÏÖActionListener½Ó¿Ú£¬Ö÷ÒªÊµÏÖactionPerformed·½·¨
      * @author HZ20232
      *
      */
@@ -198,7 +198,7 @@ class NewFrame1 extends JFrame{
         }
     }
     /**
-     * è®¾å®šæ–‡æœ¬åŸŸ
+     * Éè¶¨ÎÄ±¾Óò
      * @return
      */
     private JTextField getTextField(){

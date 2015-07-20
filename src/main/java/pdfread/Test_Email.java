@@ -30,8 +30,8 @@ public class Test_Email {
     public static void send_email() throws IOException, AddressException, MessagingException{
 
         String to = "zhen.wang2012@hotmail.com";
-        String subject = "subject";//é‚®ä»¶ä¸»é¢˜
-        String content = "content";//é‚®ä»¶å†…å®¹
+        String subject = "subject";//ÓÊ¼şÖ÷Ìâ
+        String content = "content";//ÓÊ¼şÄÚÈİ
         Properties properties = new Properties();
         InputStream resourceAsStream = null;
         try {
@@ -50,13 +50,13 @@ public class Test_Email {
         javax.mail.Session sendMailSession = javax.mail.Session.getDefaultInstance(properties, authenticator);
         MimeMessage mailMessage = new MimeMessage(sendMailSession);
         mailMessage.setFrom(new InternetAddress(properties.get("username").toString()));
-        // Message.RecipientType.TOå±æ€§è¡¨ç¤ºæ¥æ”¶è€…çš„ç±»å‹ä¸ºTO
+        // Message.RecipientType.TOÊôĞÔ±íÊ¾½ÓÊÕÕßµÄÀàĞÍÎªTO
         mailMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
         mailMessage.setSubject(subject, "UTF-8");
         mailMessage.setSentDate(new Date());
-        // MiniMultipartç±»æ˜¯ä¸€ä¸ªå®¹å™¨ç±»ï¼ŒåŒ…å«MimeBodyPartç±»å‹çš„å¯¹è±¡
+        // MiniMultipartÀàÊÇÒ»¸öÈİÆ÷Àà£¬°üº¬MimeBodyPartÀàĞÍµÄ¶ÔÏó
         Multipart mainPart = new MimeMultipart();
-        // åˆ›å»ºä¸€ä¸ªåŒ…å«HTMLå†…å®¹çš„MimeBodyPart
+        // ´´½¨Ò»¸ö°üº¬HTMLÄÚÈİµÄMimeBodyPart
         BodyPart html = new MimeBodyPart();
         html.setContent(content.trim(), "text/html; charset=utf-8");
         mainPart.addBodyPart(html);

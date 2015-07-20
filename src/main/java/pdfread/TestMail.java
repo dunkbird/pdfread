@@ -18,18 +18,18 @@ import javax.mail.internet.MimeMultipart;
 
 public class TestMail { 
 
-    private MimeMessage mimeMsg; //MIMEé‚®ä»¶å¯¹è±¡ 
-    private Session session; //é‚®ä»¶ä¼šè¯å¯¹è±¡ 
-    private Properties props; //ç³»ç»Ÿå±æ€§ 
-    private boolean needAuth = false; //smtpæ˜¯å¦éœ€è¦è®¤è¯ 
-    //smtpè®¤è¯ç”¨æˆ·åå’Œå¯†ç  
+    private MimeMessage mimeMsg; //MIMEÓÊ¼ş¶ÔÏó 
+    private Session session; //ÓÊ¼ş»á»°¶ÔÏó 
+    private Properties props; //ÏµÍ³ÊôĞÔ 
+    private boolean needAuth = false; //smtpÊÇ·ñĞèÒªÈÏÖ¤ 
+    //smtpÈÏÖ¤ÓÃ»§ÃûºÍÃÜÂë 
     private String username; 
     private String password; 
-    private Multipart mp; //Multipartå¯¹è±¡,é‚®ä»¶å†…å®¹,æ ‡é¢˜,é™„ä»¶ç­‰å†…å®¹å‡æ·»åŠ åˆ°å…¶ä¸­åå†ç”ŸæˆMimeMessageå¯¹è±¡ 
+    private Multipart mp; //Multipart¶ÔÏó,ÓÊ¼şÄÚÈİ,±êÌâ,¸½¼şµÈÄÚÈİ¾ùÌí¼Óµ½ÆäÖĞºóÔÙÉú³ÉMimeMessage¶ÔÏó 
      
     /**
      * Constructor
-     * @param smtp é‚®ä»¶å‘é€æœåŠ¡å™¨
+     * @param smtp ÓÊ¼ş·¢ËÍ·şÎñÆ÷
      */
     public TestMail(String smtp){ 
         setSmtpHost(smtp); 
@@ -37,50 +37,50 @@ public class TestMail {
     } 
 
     /**
-     * è®¾ç½®é‚®ä»¶å‘é€æœåŠ¡å™¨
+     * ÉèÖÃÓÊ¼ş·¢ËÍ·şÎñÆ÷
      * @param hostName String 
      */
     public void setSmtpHost(String hostName) { 
-        System.out.println("è®¾ç½®ç³»ç»Ÿå±æ€§ï¼šmail.smtp.host = "+hostName); 
+        System.out.println("ÉèÖÃÏµÍ³ÊôĞÔ£ºmail.smtp.host = "+hostName); 
         if(props == null)
-            props = System.getProperties(); //è·å¾—ç³»ç»Ÿå±æ€§å¯¹è±¡  
-        props.put("mail.smtp.host",hostName); //è®¾ç½®SMTPä¸»æœº 
+            props = System.getProperties(); //»ñµÃÏµÍ³ÊôĞÔ¶ÔÏó  
+        props.put("mail.smtp.host",hostName); //ÉèÖÃSMTPÖ÷»ú 
     } 
 
 
     /**
-     * åˆ›å»ºMIMEé‚®ä»¶å¯¹è±¡  
+     * ´´½¨MIMEÓÊ¼ş¶ÔÏó  
      * @return
      */
     public boolean createMimeMessage() 
     { 
         try { 
-            System.out.println("å‡†å¤‡è·å–é‚®ä»¶ä¼šè¯å¯¹è±¡ï¼"); 
-            session = Session.getDefaultInstance(props,null); //è·å¾—é‚®ä»¶ä¼šè¯å¯¹è±¡ 
+            System.out.println("×¼±¸»ñÈ¡ÓÊ¼ş»á»°¶ÔÏó£¡"); 
+            session = Session.getDefaultInstance(props,null); //»ñµÃÓÊ¼ş»á»°¶ÔÏó 
         } 
         catch(Exception e){ 
-            System.err.println("è·å–é‚®ä»¶ä¼šè¯å¯¹è±¡æ—¶å‘ç”Ÿé”™è¯¯ï¼"+e); 
+            System.err.println("»ñÈ¡ÓÊ¼ş»á»°¶ÔÏóÊ±·¢Éú´íÎó£¡"+e); 
             return false; 
         } 
     
-        System.out.println("å‡†å¤‡åˆ›å»ºMIMEé‚®ä»¶å¯¹è±¡ï¼"); 
+        System.out.println("×¼±¸´´½¨MIMEÓÊ¼ş¶ÔÏó£¡"); 
         try { 
-            mimeMsg = new MimeMessage(session); //åˆ›å»ºMIMEé‚®ä»¶å¯¹è±¡ 
+            mimeMsg = new MimeMessage(session); //´´½¨MIMEÓÊ¼ş¶ÔÏó 
             mp = new MimeMultipart(); 
         
             return true; 
         } catch(Exception e){ 
-            System.err.println("åˆ›å»ºMIMEé‚®ä»¶å¯¹è±¡å¤±è´¥ï¼"+e); 
+            System.err.println("´´½¨MIMEÓÊ¼ş¶ÔÏóÊ§°Ü£¡"+e); 
             return false; 
         } 
     }   
     
     /**
-     * è®¾ç½®SMTPæ˜¯å¦éœ€è¦éªŒè¯
+     * ÉèÖÃSMTPÊÇ·ñĞèÒªÑéÖ¤
      * @param need
      */
     public void setNeedAuth(boolean need) { 
-        System.out.println("è®¾ç½®smtpèº«ä»½è®¤è¯ï¼šmail.smtp.auth = "+need); 
+        System.out.println("ÉèÖÃsmtpÉí·İÈÏÖ¤£ºmail.smtp.auth = "+need); 
         if(props == null) props = System.getProperties(); 
         if(need){ 
             props.put("mail.smtp.auth","true"); 
@@ -90,7 +90,7 @@ public class TestMail {
     } 
 
     /**
-     * è®¾ç½®ç”¨æˆ·åå’Œå¯†ç 
+     * ÉèÖÃÓÃ»§ÃûºÍÃÜÂë
      * @param name
      * @param pass
      */
@@ -100,24 +100,24 @@ public class TestMail {
     } 
 
     /**
-     * è®¾ç½®é‚®ä»¶ä¸»é¢˜
+     * ÉèÖÃÓÊ¼şÖ÷Ìâ
      * @param mailSubject
      * @return
      */
     public boolean setSubject(String mailSubject) { 
-        System.out.println("è®¾ç½®é‚®ä»¶ä¸»é¢˜ï¼"); 
+        System.out.println("ÉèÖÃÓÊ¼şÖ÷Ìâ£¡"); 
         try{ 
             mimeMsg.setSubject(mailSubject); 
             return true; 
         } 
         catch(Exception e) { 
-            System.err.println("è®¾ç½®é‚®ä»¶ä¸»é¢˜å‘ç”Ÿé”™è¯¯ï¼"); 
+            System.err.println("ÉèÖÃÓÊ¼şÖ÷Ìâ·¢Éú´íÎó£¡"); 
             return false; 
         } 
     }
     
     /** 
-     * è®¾ç½®é‚®ä»¶æ­£æ–‡
+     * ÉèÖÃÓÊ¼şÕıÎÄ
      * @param mailBody String 
      */ 
     public boolean setBody(String mailBody) { 
@@ -128,17 +128,17 @@ public class TestMail {
         
             return true; 
         } catch(Exception e){ 
-        System.err.println("è®¾ç½®é‚®ä»¶æ­£æ–‡æ—¶å‘ç”Ÿé”™è¯¯ï¼"+e); 
+        System.err.println("ÉèÖÃÓÊ¼şÕıÎÄÊ±·¢Éú´íÎó£¡"+e); 
         return false; 
         } 
     } 
     /** 
-     * æ·»åŠ é™„ä»¶
+     * Ìí¼Ó¸½¼ş
      * @param filename String 
      */ 
     public boolean addFileAffix(String filename) { 
     
-        System.out.println("å¢åŠ é‚®ä»¶é™„ä»¶ï¼š"+filename); 
+        System.out.println("Ôö¼ÓÓÊ¼ş¸½¼ş£º"+filename); 
         try{ 
             BodyPart bp = new MimeBodyPart(); 
             FileDataSource fileds = new FileDataSource(filename); 
@@ -149,26 +149,26 @@ public class TestMail {
             
             return true; 
         } catch(Exception e){ 
-            System.err.println("å¢åŠ é‚®ä»¶é™„ä»¶ï¼š"+filename+"å‘ç”Ÿé”™è¯¯ï¼"+e); 
+            System.err.println("Ôö¼ÓÓÊ¼ş¸½¼ş£º"+filename+"·¢Éú´íÎó£¡"+e); 
             return false; 
         } 
     } 
     
     /** 
-     * è®¾ç½®å‘ä¿¡äºº
+     * ÉèÖÃ·¢ĞÅÈË
      * @param from String 
      */ 
     public boolean setFrom(String from) { 
-        System.out.println("è®¾ç½®å‘ä¿¡äººï¼"); 
+        System.out.println("ÉèÖÃ·¢ĞÅÈË£¡"); 
         try{ 
-            mimeMsg.setFrom(new InternetAddress(from)); //è®¾ç½®å‘ä¿¡äºº 
+            mimeMsg.setFrom(new InternetAddress(from)); //ÉèÖÃ·¢ĞÅÈË 
             return true; 
         } catch(Exception e) { 
             return false; 
         } 
     } 
     /** 
-     * è®¾ç½®æ”¶ä¿¡äºº
+     * ÉèÖÃÊÕĞÅÈË
      * @param to String 
      */ 
     public boolean setTo(String to){ 
@@ -182,7 +182,7 @@ public class TestMail {
     } 
     
     /** 
-     * è®¾ç½®æŠ„é€äºº
+     * ÉèÖÃ³­ËÍÈË
      * @param copyto String  
      */ 
     public boolean setCopyTo(String copyto) 
@@ -197,14 +197,14 @@ public class TestMail {
     } 
     
     /** 
-     * å‘é€é‚®ä»¶
+     * ·¢ËÍÓÊ¼ş
      */ 
     public boolean sendOut() 
     { 
         try{ 
             mimeMsg.setContent(mp); 
             mimeMsg.saveChanges(); 
-            System.out.println("æ­£åœ¨å‘é€é‚®ä»¶...."); 
+            System.out.println("ÕıÔÚ·¢ËÍÓÊ¼ş...."); 
             
             Session mailSession = Session.getInstance(props,null); 
             Transport transport = mailSession.getTransport("smtp"); 
@@ -213,18 +213,18 @@ public class TestMail {
             transport.sendMessage(mimeMsg,mimeMsg.getRecipients(Message.RecipientType.CC)); 
             //transport.send(mimeMsg); 
             
-            System.out.println("å‘é€é‚®ä»¶æˆåŠŸï¼"); 
+            System.out.println("·¢ËÍÓÊ¼ş³É¹¦£¡"); 
             transport.close(); 
             
             return true; 
         } catch(Exception e) { 
-            System.err.println("é‚®ä»¶å‘é€å¤±è´¥ï¼"+e); 
+            System.err.println("ÓÊ¼ş·¢ËÍÊ§°Ü£¡"+e); 
             return false; 
         } 
     } 
 
     /**
-     * è°ƒç”¨sendOutæ–¹æ³•å®Œæˆé‚®ä»¶å‘é€
+     * µ÷ÓÃsendOut·½·¨Íê³ÉÓÊ¼ş·¢ËÍ
      * @param smtp
      * @param from
      * @param to
@@ -236,7 +236,7 @@ public class TestMail {
      */
     public static boolean send(String smtp,String from,String to,String subject,String content,String username,String password) {
         TestMail theMail = new TestMail(smtp);
-        theMail.setNeedAuth(true); //éœ€è¦éªŒè¯
+        theMail.setNeedAuth(true); //ĞèÒªÑéÖ¤
         
         if(!theMail.setSubject(subject)) return false;
         if(!theMail.setBody(content)) return false;
@@ -249,7 +249,7 @@ public class TestMail {
     }
     
     /**
-     * è°ƒç”¨sendOutæ–¹æ³•å®Œæˆé‚®ä»¶å‘é€,å¸¦æŠ„é€
+     * µ÷ÓÃsendOut·½·¨Íê³ÉÓÊ¼ş·¢ËÍ,´ø³­ËÍ
      * @param smtp
      * @param from
      * @param to
@@ -262,7 +262,7 @@ public class TestMail {
      */
     public static boolean sendAndCc(String smtp,String from,String to,String copyto,String subject,String content,String username,String password) {
         TestMail theMail = new TestMail(smtp);
-        theMail.setNeedAuth(true); //éœ€è¦éªŒè¯
+        theMail.setNeedAuth(true); //ĞèÒªÑéÖ¤
         
         if(!theMail.setSubject(subject)) return false;
         if(!theMail.setBody(content)) return false;
@@ -276,7 +276,7 @@ public class TestMail {
     }
     
     /**
-     * è°ƒç”¨sendOutæ–¹æ³•å®Œæˆé‚®ä»¶å‘é€,å¸¦é™„ä»¶
+     * µ÷ÓÃsendOut·½·¨Íê³ÉÓÊ¼ş·¢ËÍ,´ø¸½¼ş
      * @param smtp
      * @param from
      * @param to
@@ -284,12 +284,12 @@ public class TestMail {
      * @param content
      * @param username
      * @param password
-     * @param filename é™„ä»¶è·¯å¾„
+     * @param filename ¸½¼şÂ·¾¶
      * @return
      */
     public static boolean send(String smtp,String from,String to,String subject,String content,String username,String password,String filename) {
         TestMail theMail = new TestMail(smtp);
-        theMail.setNeedAuth(true); //éœ€è¦éªŒè¯
+        theMail.setNeedAuth(true); //ĞèÒªÑéÖ¤
         
         if(!theMail.setSubject(subject)) return false;
         if(!theMail.setBody(content)) return false;
@@ -303,7 +303,7 @@ public class TestMail {
     }
     
     /**
-     * è°ƒç”¨sendOutæ–¹æ³•å®Œæˆé‚®ä»¶å‘é€,å¸¦é™„ä»¶å’ŒæŠ„é€
+     * µ÷ÓÃsendOut·½·¨Íê³ÉÓÊ¼ş·¢ËÍ,´ø¸½¼şºÍ³­ËÍ
      * @param smtp
      * @param from
      * @param to
@@ -317,7 +317,7 @@ public class TestMail {
      */
     public static boolean sendAndCc(String smtp,String from,String to,String copyto,String subject,String content,String username,String password,String filename) {
         TestMail theMail = new TestMail(smtp);
-        theMail.setNeedAuth(true); //éœ€è¦éªŒè¯
+        theMail.setNeedAuth(true); //ĞèÒªÑéÖ¤
         
         if(!theMail.setSubject(subject)) return false;
         if(!theMail.setBody(content)) return false;
@@ -337,12 +337,11 @@ public class TestMail {
         String from = "zhen.wang2012@hotmail.com";
         String to = "zhen.wang2012@hotmail.com";
         String copyto = "zhen.wang2012@hotmail.com";
-        String subject = "é‚®ä»¶ä¸»é¢˜";
-        String content = "é‚®ä»¶å†…å®¹";
+        String subject = "ÓÊ¼şÖ÷Ìâ";
+        String content = "ÓÊ¼şÄÚÈİ";
         String username="93091620@qq.com";
         String password="abcd@1234";
         String filename = "F://BaiduYunDownload//pdf//a.pdf";
         TestMail.sendAndCc(smtp, from, to, copyto, subject, content, username, password, filename);
     }
 } 
-

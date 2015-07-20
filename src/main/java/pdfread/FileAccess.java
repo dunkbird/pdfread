@@ -1,5 +1,6 @@
 package pdfread;
 
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -134,11 +135,11 @@ public class FileAccess {
         FileReader fr = null;
         try {
             fr = new FileReader(file);
-            reader = new BufferedReader(fr);// 换成你的文件名
-            reader.readLine();// 第一行信息，为标题信息，不用,如果需要，注释掉
+            reader = new BufferedReader(fr);// 换成你的文件�?
+            reader.readLine();// 第一行信息，为标题信息，不用,如果�?��，注释掉
             String line = null;
             while ((line = reader.readLine()) != null) {
-                String[] item = line.split(",");// CSV格式文件为逗号分隔符文件，这里根据逗号切分
+                String[] item = line.split(",");// CSV格式文件为�?号分隔符文件，这里根据�?号切�?
                 if (item.length == 3) {
                     PdfMode pdfMode = new PdfMode();
                     pdfMode.setCompanyCode(item[0]);
@@ -175,11 +176,11 @@ public class FileAccess {
         FileReader fr = null;
         try {
             fr = new FileReader(file);
-            reader = new BufferedReader(fr);// 换成你的文件名
-            reader.readLine();// 第一行信息，为标题信息，不用,如果需要，注释掉
+            reader = new BufferedReader(fr);// 换成你的文件�?
+            reader.readLine();// 第一行信息，为标题信息，不用,如果�?��，注释掉
             String line = null;
             while ((line = reader.readLine()) != null) {
-                String[] item = line.split(",");// CSV格式文件为逗号分隔符文件，这里根据逗号切分
+                String[] item = line.split(",");// CSV格式文件为�?号分隔符文件，这里根据�?号切�?
                 if (item.length == 6 || item.length == 5) {
                     PdfMode pdfMode = new PdfMode();
                     pdfMode.setOrderNo(item[0]);
@@ -223,8 +224,8 @@ public class FileAccess {
         ;
         try {
             fr = new FileReader(file);
-            reader = new BufferedReader(fr);// 换成你的文件名
-            reader.readLine();// 第一行信息，为标题信息，不用,如果需要，注释掉
+            reader = new BufferedReader(fr);// 换成你的文件�?
+            reader.readLine();// 第一行信息，为标题信息，不用,如果�?��，注释掉
             String line = null;
             while ((line = reader.readLine()) != null) {
                 buffer.append("<span>").append(line).append("</span><br>");
@@ -259,26 +260,28 @@ public class FileAccess {
             File csv = new File(file); // CSV数据文件
             fw = new FileWriter(csv, false);
             bw = new BufferedWriter(fw); // 附加
-            // 添加新的数据行
+            // 添加新的数据�?
 
-            bw.write(new String(commonCsvHead, "UTF-8"));
+//            bw.write(new String(commonCsvHead, "UTF-8"));
             bw.write("order_no,company_code,company_name,mail_address,pdf_file,sendmail_flag");
             bw.newLine();
             for (PdfMode mode : lists) {
                 StringBuffer buffer = new StringBuffer();
                 buffer.append(converStr(mode.getOrderNo())).append(",");
                 buffer.append(converStr(mode.getCompanyCode())).append(",");
+//                buffer.append(" ").append(",");
                 buffer.append(converStr(mode.getCompanyName())).append(",");
                 buffer.append(converStr(mode.getMailAddress())).append(",");
                 buffer.append(converStr(mode.getPdfFile())).append(",");
                 buffer.append(converStr(mode.getSendMailFlg()));
-                bw.write(converCode(buffer.toString(), "UTF-8", "GBK"));
+                bw.write(buffer.toString());
+//                bw.write(converCode(buffer.toString(), "UTF-8", "GBK"));
                 bw.newLine();
             }
             bw.close();
             fw.close();
         } catch (Exception e) {
-            // File对象的创建过程中的异常捕获
+            // File对象的创建过程中的异常捕�?
             e.printStackTrace();
         } finally {
             if (bw != null) {
@@ -296,19 +299,19 @@ public class FileAccess {
         }
     }
 
-    public static String converCode(String str, String u1, String u2) {
-        try {
-            str = new String(str.getBytes(u1));
-            System.out.println(str);
-            str = new String(str.getBytes(), u1);
-            System.out.println(str);
-            // str = new String(str.getBytes(u2));
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return str;
-    }
+//    public static String converCode(String str, String u1, String u2) {
+//        try {
+//            str = new String(str.getBytes(u1));
+//            System.out.println(str);
+//            str = new String(str.getBytes(), u1);
+//            System.out.println(str);
+//            // str = new String(str.getBytes(u2));
+//        } catch (UnsupportedEncodingException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        return str;
+//    }
 
     public static String converStr(String str) {
         if (str == null) {
@@ -321,6 +324,6 @@ public class FileAccess {
     public static void main(String[] str) {
         // Move("F:\\pdf\\a.pdf","F:\\pdf\\20150625\\b.pdf");
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");// 设置日期格式
-        System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+        System.out.println(df.format(new Date()));// new Date()为获取当前系统时�?
     }
 }

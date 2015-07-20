@@ -1,5 +1,6 @@
 package pdfread;
 
+
 public class PdfMode {
     
     String orderNo = null;

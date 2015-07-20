@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 /**
- * swingåŸºç¡€å®ä¾‹
+ * swing»ù´¡ÊµÀı
  * 
  * @author HZ20232
  * 
@@ -26,7 +26,7 @@ import javax.swing.SwingUtilities;
 public class DHLMain {
     public static void main(String args[]) throws Exception {
         NewFrame frame1 = new NewFrame();
-        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ä¸€å®šè¦è®¾ç½®å…³é—­
+        frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ò»¶¨ÒªÉèÖÃ¹Ø±Õ
         frame1.setVisible(true);
     }
 }
@@ -45,24 +45,25 @@ class NewFrame extends JFrame {
     private JTextField textPath;
     private boolean buttonEvent;
 
-    private Runnable run = null; // æ›´æ–°ç»„ä»¶çš„çº¿ç¨‹
+    private Runnable run = null; // ¸üĞÂ×é¼şµÄÏß³Ì
     private int countProcess = 0;
     private int okMail = 0;
-    private int pdfReadSuccessCount = 0; //è¦å¤„ç†çš„pdfçš„é”™è¯¯çš„æ€»ä»¶æ•°
+    private int pdfReadSuccessCount = 0; //Òª´¦ÀíµÄpdfµÄ´íÎóµÄ×Ü¼şÊı
+    private int mailSize = 0;
     
     public NewFrame() {
         super();
         this.setSize(600, 500);
-        this.getContentPane().setLayout(null); // è®¾ç½®å¸ƒå±€æ§åˆ¶å™¨
-        this.add(this.getTextField(), null); // æ·»åŠ æ–‡æœ¬æ¡†
-        this.add(this.getConvertButton(), null); // æ·»åŠ æŒ‰é’®
-        this.add(this.getSendMailButton(), null); // æ·»åŠ æŒ‰é’®
-        this.add(this.getLabel(), null); // æ·»åŠ æ ‡ç­¾
-        this.add(this.getVersionLabel(), null); // æ·»åŠ æ ‡ç­¾
-        this.add(this.getMessageLabel(), null); // æ·»åŠ æ ‡ç­¾
-        this.setTitle("DHL Crystal Report Notice Tool"); // è®¾ç½®çª—å£æ ‡é¢˜
+        this.getContentPane().setLayout(null); // ÉèÖÃ²¼¾Ö¿ØÖÆÆ÷
+        this.add(this.getTextField(), null); // Ìí¼ÓÎÄ±¾¿ò
+        this.add(this.getConvertButton(), null); // Ìí¼Ó°´Å¥
+        this.add(this.getSendMailButton(), null); // Ìí¼Ó°´Å¥
+        this.add(this.getLabel(), null); // Ìí¼Ó±êÇ©
+        this.add(this.getVersionLabel(), null); // Ìí¼Ó±êÇ©
+        this.add(this.getMessageLabel(), null); // Ìí¼Ó±êÇ©
+        this.setTitle("DHL Crystal Report Notice Tool"); // ÉèÖÃ´°¿Ú±êÌâ
         buttonEvent = true;
-        run = new Runnable() { // å®ä¾‹åŒ–æ›´æ–°ç»„ä»¶çš„çº¿ç¨‹
+        run = new Runnable() { // ÊµÀı»¯¸üĞÂ×é¼şµÄÏß³Ì
             public void run() {
                 System.out.println("**************************" + countProcess);
                 if (countProcess == 0) {
@@ -75,9 +76,9 @@ class NewFrame extends JFrame {
     }
 
     /**
-     * è®¾ç½®æ ‡ç­¾
+     * ÉèÖÃ±êÇ©
      * 
-     * @return è®¾ç½®å¥½çš„æ ‡ç­¾
+     * @return ÉèÖÃºÃµÄ±êÇ©
      */
     private JLabel getLabel() {
         if (labelPath == null) {
@@ -90,9 +91,9 @@ class NewFrame extends JFrame {
     }
 
     /**
-     * è®¾ç½®æ ‡ç­¾
+     * ÉèÖÃ±êÇ©
      * 
-     * @return è®¾ç½®å¥½çš„æ ‡ç­¾
+     * @return ÉèÖÃºÃµÄ±êÇ©
      */
     private JLabel getMessageLabel() {
         if (labelMessage == null) {
@@ -100,7 +101,7 @@ class NewFrame extends JFrame {
             labelMessage.setBounds(96, 200, 400, 40);
             labelMessage.setText("");
             labelMessage.setBackground(Color.RED);
-            Font f = new Font("å®‹ä½“", Font.BOLD, 18);
+            Font f = new Font("ËÎÌå", Font.BOLD, 18);
             labelMessage.setFont(f);
             labelMessage.setToolTipText("Message");
         }
@@ -108,9 +109,9 @@ class NewFrame extends JFrame {
     }
 
     /**
-     * è®¾ç½®æ ‡ç­¾
+     * ÉèÖÃ±êÇ©
      * 
-     * @return è®¾ç½®å¥½çš„æ ‡ç­¾
+     * @return ÉèÖÃºÃµÄ±êÇ©
      */
     private JLabel getVersionLabel() {
         if (labelVersion == null) {
@@ -123,9 +124,9 @@ class NewFrame extends JFrame {
     }
 
     /**
-     * è®¾ç½®æŒ‰é’®
+     * ÉèÖÃ°´Å¥
      * 
-     * @return è®¾ç½®å¥½çš„æŒ‰é’®
+     * @return ÉèÖÃºÃµÄ°´Å¥
      */
     private JButton getConvertButton() {
         if (buttonConvert == null) {
@@ -133,13 +134,13 @@ class NewFrame extends JFrame {
             buttonConvert.setBounds(103, 110, 100, 27);
             buttonConvert.setText("Convert");
             buttonConvert.setToolTipText("OK");
-            buttonConvert.addActionListener(new ConvertButton()); // æ·»åŠ ç›‘å¬å™¨ç±»ï¼Œå…¶ä¸»è¦çš„å“åº”éƒ½ç”±ç›‘å¬å™¨ç±»çš„æ–¹æ³•å®ç°
+            buttonConvert.addActionListener(new ConvertButton()); // Ìí¼Ó¼àÌıÆ÷Àà£¬ÆäÖ÷ÒªµÄÏìÓ¦¶¼ÓÉ¼àÌıÆ÷ÀàµÄ·½·¨ÊµÏÖ
         }
         return buttonConvert;
     }
 
     /**
-     * ç›‘å¬å™¨ç±»å®ç°ActionListeneræ¥å£ï¼Œä¸»è¦å®ç°actionPerformedæ–¹æ³•
+     * ¼àÌıÆ÷ÀàÊµÏÖActionListener½Ó¿Ú£¬Ö÷ÒªÊµÏÖactionPerformed·½·¨
      * 
      * @author HZ20232
      * 
@@ -199,8 +200,8 @@ class NewFrame extends JFrame {
                                                     }
                                                 });
                                         if (pdfMode != null) {
-                                        	pdfReadSuccessCount++;
-                                        	pdfModeLists.add(pdfMode);
+                                            pdfReadSuccessCount++;
+                                            pdfModeLists.add(pdfMode);
                                             System.out.println(pdfMode);
                                         }
                                     }
@@ -235,7 +236,7 @@ class NewFrame extends JFrame {
                         SwingUtilities.invokeAndWait(new Runnable() {
                             public void run() {
                                 labelMessage.setText("3. Done."  
-                                		+ " Success: " + pdfReadSuccessCount + ", Failure: " + (countProcess - pdfReadSuccessCount) );
+                                        + " Success: " + pdfReadSuccessCount + ", Failure: " + (countProcess - pdfReadSuccessCount) );
                             }
                         });
                     } catch (Exception e) {
@@ -248,9 +249,9 @@ class NewFrame extends JFrame {
     }
 
     /**
-     * è®¾ç½®æŒ‰é’®
+     * ÉèÖÃ°´Å¥
      * 
-     * @return è®¾ç½®å¥½çš„æŒ‰é’®
+     * @return ÉèÖÃºÃµÄ°´Å¥
      */
     private JButton getSendMailButton() {
         if (buttonSendMail == null) {
@@ -258,13 +259,13 @@ class NewFrame extends JFrame {
             buttonSendMail.setBounds(301, 110, 100, 27);
             buttonSendMail.setText("Send Mail");
             buttonSendMail.setToolTipText("OK");
-            buttonSendMail.addActionListener(new SendMailButton());// æ·»åŠ ç›‘å¬å™¨ç±»ï¼Œå…¶ä¸»è¦çš„å“åº”éƒ½ç”±ç›‘å¬å™¨ç±»çš„æ–¹æ³•å®ç°
+            buttonSendMail.addActionListener(new SendMailButton());// Ìí¼Ó¼àÌıÆ÷Àà£¬ÆäÖ÷ÒªµÄÏìÓ¦¶¼ÓÉ¼àÌıÆ÷ÀàµÄ·½·¨ÊµÏÖ
         }
         return buttonSendMail;
     }
 
     /**
-     * ç›‘å¬å™¨ç±»å®ç°ActionListeneræ¥å£ï¼Œä¸»è¦å®ç°actionPerformedæ–¹æ³•
+     * ¼àÌıÆ÷ÀàÊµÏÖActionListener½Ó¿Ú£¬Ö÷ÒªÊµÏÖactionPerformed·½·¨
      * 
      * @author HZ20232
      * 
@@ -272,6 +273,7 @@ class NewFrame extends JFrame {
     private class SendMailButton implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             okMail = 0;
+            mailSize = 0;
             new Thread(new Runnable() {
                 public void run() {
                     try {
@@ -298,8 +300,8 @@ class NewFrame extends JFrame {
 
                         HashMap<String, MailMode> mailModeMap = new HashMap<String, MailMode>();
                         String strRootPath = new File(strPath).getParent();
-                        String content = FileAccess.converCode(FileAccess.readMailTpl(strRootPath
-                                + "\\" + TPL_FILE_EMAIL_CONTENT),"UTF-8","GBK");
+                        String content = FileAccess.readMailTpl(strRootPath
+                                + "\\" + TPL_FILE_EMAIL_CONTENT);
                         for (PdfMode pdfMode : pdfLists) {
                             if (!MailMode.SENDMAIL_FLG_OK.equals(pdfMode
                                     .getSendMailFlg())) {
@@ -318,15 +320,15 @@ class NewFrame extends JFrame {
                                     mailMode.setTo(pdfMode.getMailAddress());
                                     Map<String,String> orderNos = mailMode.getOrderNos();
                                     if (!orderNos.containsKey(pdfMode.getOrderNo())){
-                                    	mailMode.setOrderNos(pdfMode.getOrderNo());
+                                        mailMode.setOrderNos(pdfMode.getOrderNo());
                                         mailMode.setAttachFiles(pdfMode
                                                 .getPdfFile());
                                     }
                                     mailMode.setLogoFile(strRootPath
                                             + "\\logo.png");
                                     mailMode.setContent(content);
-                                    SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");// è®¾ç½®æ—¥æœŸæ ¼å¼
-                                    mailMode.setTitle("DHLæŠ¥å…³å•(" + df.format(new Date()) +"-"+ companyCode + ")");
+                                    SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");// ÉèÖÃÈÕÆÚ¸ñÊ½
+                                    mailMode.setTitle("DHL±¨¹Øµ¥(" + df.format(new Date()) +"-"+ companyCode + ")");
                                     mailModeMap.put(companyCode, mailMode);
                                 }
                             }
@@ -336,7 +338,7 @@ class NewFrame extends JFrame {
                                     + "\\" + PROP_FILE_EMAIL_CONFIG);
                         } catch (Exception e2) {
                             // TODO Auto-generated catch block
-                            labelMessage.setText("é‚®ä»¶é…ç½®æ–‡ä»¶è¯»å…¥å‡ºé”™ï¼");
+                            labelMessage.setText("ÓÊ¼şÅäÖÃÎÄ¼ş¶ÁÈë³ö´í£¡");
                             return;
                         }
                         for (String key : mailModeMap.keySet()) {
@@ -388,11 +390,11 @@ class NewFrame extends JFrame {
 
                         FileAccess.writeCSVByPdfModes(strPath
                                 + CSV_FILE_ORDER_INFO, pdfListsForWrite);
-                        int mailSize = mailModeMap.keySet().size();
+                        mailSize = mailModeMap.keySet().size();
                         SwingUtilities
                         .invokeAndWait(new Runnable() {
                             public void run() {
-                            	 labelMessage.setText("3. Done. Success: "
+                                 labelMessage.setText("3. Done. Success: "
                                          + okMail + ", Failure: " + (mailSize - okMail));
                             }
                         });
@@ -406,7 +408,7 @@ class NewFrame extends JFrame {
     }
 
     /**
-     * è®¾å®šæ–‡æœ¬åŸŸ
+     * Éè¶¨ÎÄ±¾Óò
      * 
      * @return
      */
